@@ -1,0 +1,58 @@
+@use 'customs' as c;
+@use 'globals';
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+.sign-in-logo {
+
+  i, span {
+      font-size: 20px;
+      font-style: normal;
+
+      .badge {
+        font-size: 12px;
+      }
+  }
+  
+  a, button{
+      color: white;
+  }
+
+  button:hover,
+  button:hover i,
+  button:hover span,
+  a:hover {
+      color: c.$primary;
+  }
+  
+}
+
+// USER ACCOUNT
+.account-logo {
+  i {
+    font-size: 28px;
+  }
+  
+}
+
+
+// footer
+footer {
+  p {
+      margin-bottom: 0;
+  }
+
+  .social {
+      span {
+          margin-right: 15px;
+      }
+  }
+
+
+  @media (max-width: 600px) {
+      .visit-us, .contact-us, .social {
+          width: 240px;
+      }
+  }
+  
+}
+

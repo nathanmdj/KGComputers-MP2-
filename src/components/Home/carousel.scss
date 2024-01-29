@@ -1,0 +1,6 @@
+.carousel {
+  img {
+    height: clamp(240px, 40vw, 420px);
+    object-fit: cover;
+  }
+}

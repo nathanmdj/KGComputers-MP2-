@@ -1,0 +1,43 @@
+@use '../../SASS/customs' as c;
+
+.card-img-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  // height: clamp(145px, calc(100px + 10vw), 240px);
+
+  img {
+    transition: transform 0.3s ease-in-out;
+    object-fit: cover;
+    height: 100%;
+    &:hover {
+        transform: scaleY(1.1) scaleX(1.1);
+    }
+  }
+}
+
+
+
+.btn-container{
+  display: flex;
+  justify-content: center;
+
+  >:nth-child(1) {
+      padding-inline: 20px;
+      width: 80%;
+  }
+
+  .buy-btn {
+      padding-block: 5px;
+      
+  
+      i {
+          font-size: 1rem;
+      }
+  }
+}
+
+.btn-info:hover {
+  background-color: c.$primary;
+  border-color: c.$primary;
+}

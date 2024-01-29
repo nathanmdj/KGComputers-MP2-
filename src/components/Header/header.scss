@@ -1,0 +1,14 @@
+@use '../../SASS/customs'  as c;
+
+
+.brand-logo {
+  width: 150px;
+}
+
+
+.nav-link {
+  .active {
+    color: c.$white;
+  }
+  
+}
