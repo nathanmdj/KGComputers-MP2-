@@ -1,53 +1,96 @@
-// ProductCard.js
-import React, { useState, useEffect } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
-import axios from 'axios';
+import { Card} from 'react-bootstrap';
 import './productCard.scss';
-import DesktopSidebar from '../Sidebar/FilterSidebar';
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import {Alert, Button} from 'react-bootstrap';
+import ErrorAlert from '../Alerts/ErrorAlert';
 
-const ProductCard = () => {
-  const [products, setProducts] = useState([]);
+const ProductCard = (props) => {
+    const addToCart = (button) => {
+       // Retrieve existing cart from localStorage or create a new one if it doesn't exist
+       const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+                  
+       // Create the new item to add to the cart
+       const itemIndex = existingCart.findIndex((item) => props.pID === item.pID)
+       
+       if (itemIndex !== -1) {
+         existingCart[itemIndex].qty += 1;
+         localStorage.setItem('cart', JSON.stringify(existingCart));
+        
+         if(button === 'add'){
+          props.showAlert('Success')
+          props.variant('success')
+         } else if(button === 'buy'){
+          props.showOffcanvas()
+         }
+         return
+       }
+       
+       const newItem = {
+         pID: props.pID,
+         qty: 1
+       };
 
-  useEffect(() => {
-    // Fetch data from the backend
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/products');
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+       if(props.stocks < 1 || props.stocks == undefined) {
+         props.showAlert('Error! Item is out of stock')
+         props.variant('danger')
+         
+       } else {
+         existingCart.push(newItem);
 
-    fetchData();
-  }, []);
-
+       // Save the updated cart back to localStorage
+         localStorage.setItem('cart', JSON.stringify(existingCart));
+         console.log('Item added to cart:', newItem);
+        
+         if(button === 'add'){
+          props.showAlert('Success')
+          props.variant('success')
+         } else if(button === 'buy'){
+          props.showOffcanvas()
+         }
+       }
+    }
   return (
-    
-    <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-      <Col className='d-none d-md-block '><DesktopSidebar/></Col>
-    {products.map((product) => (
-      <Col key={product.pID}>
-        <Card className='h-100'>
-          <div className="card-img-container">
-            <Card.Img variant="top" src={product.imageUrl} />
-          </div>
+
+        <Card className='h-100 product-card'>
+          <Link
+            to={`/products/description/${props.pID}`}
+          >
+            <div className="card-img-container">
+              <Card.Img variant="top" src={props.imageUrl} alt='product image'/>
+            </div>  
+          </Link>
+          
           <Card.Body className="d-flex flex-column">
-            <Card.Title>{product.name}</Card.Title>
-            <Card.Text>{product.description}</Card.Text>
+            <Link
+              to={'/products/description'}
+            >
+              <Card.Title>{props.name}</Card.Title>
+              <Card.Text>{props.description}</Card.Text>
+            </Link>
             
             <div className='mt-auto'>
-              <Card.Text>₱{product.price}</Card.Text>
+              <Card.Text className='price'>₱{props.price}</Card.Text>
               <div className="btn-container gap-1">
-                <button className='btn buy-btn btn-info'>Buy Now</button>
-                <button className='btn buy-btn btn-info'><span className="bi-cart-plus"></span></button>
+                <button 
+                className='btn buy-btn btn-info'
+                onClick={() => {
+                  addToCart('buy')
+                 
+                }}
+                >Buy Now</button>
+                <button 
+                className='btn buy-btn btn-info'
+                value={props.pID}
+                onClick={() => {
+                    addToCart('add')
+                }}
+                ><span className="bi-cart-plus"></span></button>
+                 
               </div>
             </div>
           </Card.Body>
         </Card>
-      </Col>
-    ))}
-  </Row>
   );
 };
 

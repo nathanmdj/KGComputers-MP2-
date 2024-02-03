@@ -4,7 +4,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  // height: clamp(145px, calc(100px + 10vw), 240px);
+  
 
   img {
     transition: transform 0.3s ease-in-out;
@@ -17,6 +17,10 @@
 }
 
 
+.price {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
 
 .btn-container{
   display: flex;
@@ -38,6 +42,13 @@
 }
 
 .btn-info:hover {
-  background-color: c.$primary;
-  border-color: c.$primary;
+  background-color: c.$primary !important;
+  border-color: c.$primary !important;
+}
+
+.product-card {
+
+  a {
+    color: black !important;
+  }
 }

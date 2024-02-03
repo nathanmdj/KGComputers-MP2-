@@ -2,16 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Carousel } from 'react-bootstrap';
 import './carousel.scss';
-
+import Spinner from '../../components/Spinner/Spinner';
+const backend_url = 'http://localhost:5000';
 
 const MyCarousel = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/carousel-img');
+        const response = await axios.get(`${backend_url}/carousel-img`);
         setImages(response.data);
       } catch (error) {
         console.error('Error fetching images:', error);
@@ -26,7 +27,9 @@ const MyCarousel = () => {
   return (
     <div>
       {loading ? (
-        <p>Loading images...</p>
+      
+        <Spinner/>
+       
       ) : (
         <Carousel className='c-item'>
           {images.map((image, index) => (

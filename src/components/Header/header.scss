@@ -8,7 +8,14 @@
 
 .nav-link {
   .active {
-    color: c.$white;
+    color: red !important;
   }
   
+}
+
+.menu-bar {
+  font-size: 1.15rem;
+  a:hover {
+    color: c.$primary !important;
+  }
 }

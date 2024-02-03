@@ -3,9 +3,9 @@ import MyCarousel from './MyCarousel'
 
 function Home() {
   return (
-    <div className='container'>
+    <div className='container-fluid'>
       <MyCarousel className='carousel'/>
-      asdfasdf
+
     </div>
   )
 }

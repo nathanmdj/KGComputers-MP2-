@@ -1,0 +1,52 @@
+.img-container {
+  img {
+    width: 100%;
+  }
+}
+
+.description-quantity {
+  
+  a {
+    color: white !important;
+  }
+}
+
+.specification {
+  font-size: 13px;
+  li {
+    list-style-type: disc;
+  }
+}
+
+.specs-container {
+  @media (min-width: 992px) {
+   margin-top: -400px;
+  }
+
+  @media (min-width: 1200px) {
+   margin-top: -200px;
+  }
+}
+
+.delivery {
+  li {
+    list-style: disc;
+  }
+}
+
+.warranty {
+  span {
+    color: white;
+  }
+}
+
+.payment-img {
+  display: flex;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+  img{
+      width: 100%;
+      
+  }
+}

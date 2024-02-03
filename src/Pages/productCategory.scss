@@ -1,0 +1,11 @@
+@use '../SASS/customs' as c;
+
+.side-bar {
+  height: 600px;
+  background-color: c.$gray-100;
+}
+
+.sort {
+  display: flex;
+  justify-content: space-between;
+}

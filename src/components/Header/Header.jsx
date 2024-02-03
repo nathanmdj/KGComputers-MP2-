@@ -61,7 +61,7 @@ function Header() {
             to="/"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? 'active' : "not-active" }`
+              ${isActive ? 'text-primary' : ''}`
               }
               
             >
@@ -73,7 +73,7 @@ function Header() {
             to="/desktop"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? 'active' : "not-active" }`
+              ${isActive ? 'text-primary' : '' }`
               }
             >
               Desktop
@@ -84,7 +84,7 @@ function Header() {
             to="/laptop"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? 'active' : "not-active" }`
+              ${isActive ? 'text-primary' : '' }`
               }
             >
               Laptop
@@ -95,7 +95,7 @@ function Header() {
             to="/peripherals"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? 'active' : "not-active" }`
+              ${isActive ? 'text-primary' : '' }`
               }
             >
               Peripherals
@@ -106,7 +106,7 @@ function Header() {
             to="/components"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? 'active' : "not-active" }`
+              ${isActive ? 'text-primary' : '' }`
               }
             >
               Components
@@ -118,7 +118,7 @@ function Header() {
       </nav>
 
       {/* MENU BAR */}
-      <div className="p-3 p-md-0 d-flex align-items-center  bg-light justify-content-center">
+      <div className="p-3 p-md-0 d-flex align-items-center  bg-light justify-content-center menu-bar">
         <div className="menu-items">
           <ul className="nav justify-content-center d-none d-md-flex">
             <li>
@@ -126,7 +126,7 @@ function Header() {
             to="/"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? "text-secondary" : "text-primary" }`
+              ${isActive ? "text-primary" : "text-secondary" }`
               }
             >
               Home
@@ -137,7 +137,7 @@ function Header() {
             to="/desktop"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? "text-secondary" : "text-primary" }`
+              ${isActive ? "text-primary" : "text-secondary" }`
               }
             >
               Desktop
@@ -148,7 +148,7 @@ function Header() {
             to="/laptop"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? "text-secondary" : "text-primary" }`
+              ${isActive ? "text-primary" : "text-secondary" }`
               }
             >
               Laptop
@@ -159,7 +159,7 @@ function Header() {
             to="/peripherals"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? "text-secondary" : "text-primary" }`
+              ${isActive ? "text-primary" : "text-secondary" }`
               }
             >
               Peripherals
@@ -170,7 +170,7 @@ function Header() {
             to="/components"
               className={({isActive}) =>
               `nav-link 
-              ${isActive ? "text-secondary" : "text-primary" }`
+              ${isActive ? "text-primary" : "text-secondary" }`
               }
             >
               Components
