@@ -5,6 +5,7 @@ const DeleteFromCart = ({itemRemove}) => {
   return (
     <div>
       <Button
+      variant='danger'
       onClick={itemRemove}><span className='bi bi-trash'></span></Button>
     </div>
   )
