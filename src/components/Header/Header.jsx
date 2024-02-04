@@ -3,9 +3,10 @@ import { NavLink, Link } from 'react-router-dom';
 import logoImage from '../../assets/logo.png';
 import './header.scss';
 import Login from '../Login/Login';
+import CartButton from '../CartOffcanvas/CartButton';
 
 
-function Header() {
+function Header({onCartButtonClick}) {
   return (
     <>
       <header className="fixed-top">
@@ -35,9 +36,9 @@ function Header() {
           </div>
           {/* logo */}
           <div className="sign-in-logo gap-2 d-flex ">
-            <a className="" href="/">
-              <i className="bi bi-cart4"></i>
-            </a>
+            <CartButton
+            onCartButtonClick={onCartButtonClick}
+            />
 
             {/* <button
               className="border-0 bg-secondary"

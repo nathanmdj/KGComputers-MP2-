@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import CartOffcanvas from './components/CartOffcanvas/CartOffcanvas';
 
 function Layout() {
-  
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+  const handleCartButtonClick = () => {
+    setShowOffcanvas(true);
+  };
+
+  const handleCloseOffcanvas = () => {
+    setShowOffcanvas(false);
+  };
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Header style={{ flex: '0 0 auto' }} />
+      <Header 
+      onCartButtonClick={handleCartButtonClick}
+      style={{ flex: '0 0 auto' }} />
       <div style={{ flex: '1 0 auto', marginTop: '10em' }}>
         <Outlet/>
+        <CartOffcanvas show={showOffcanvas} handleClose={handleCloseOffcanvas} />
       </div>
       <Footer style={{ flex: '0 0 auto' }} />
     </div>

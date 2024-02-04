@@ -3,16 +3,20 @@ import ProductContextProvider, { ProductContext } from '../Context/ProductContex
 import { Card, Col, Row, Alert } from 'react-bootstrap';
 import ProductCard from '../components/Products/ProductCard';
 import './productCategory.scss'
-import {Dropdown} from 'react-bootstrap';
+
 import CartOffcanvas from '../components/CartOffcanvas/CartOffcanvas';
+import Sort from '../components/Sort/Sort';
+import { sortProduct } from '../utils/sort';
 
 
 const ProductCategory = (props) => {
   const products = useContext(ProductContext);
-
+  const [sortValue, setSortValue] = useState('')
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStyle, setAlertStyle] = useState('');
+
+  const sortedProducts = sortProduct(products, sortValue)
 
   const handleShowAlert = (message) => {
     setAlertMessage(message);
@@ -45,22 +49,11 @@ const ProductCategory = (props) => {
         <Col md={9}>
           <div className='sort'>
             <p>{(products.length < 1) ? 'No result found' : `Showing 1 - ${products.length} out of ${products.length} products`}</p>
-              <Dropdown>
-                <Dropdown.Toggle id="dropdown-basic">
-                  Sort by 
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/name-ascending">Name: A-Z</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">Name: Z-A</Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">Price: Lowest to Highest</Dropdown.Item>
-                  <Dropdown.Item href="#/action-4">Price: Highest to Lowest</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
+            <Sort setSortValue={setSortValue}/>
           </div>
           
           <Row className='g-2'>
-            {products.map((item, i) => (
+            {sortedProducts.map((item, i) => (
               <Col key={i} xs={12} sm={6}  lg={4}>
                 <ProductCard
                   pID={item.pID}
