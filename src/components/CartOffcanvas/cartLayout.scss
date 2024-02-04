@@ -10,3 +10,26 @@
     }
   }
 }
+
+.cart-icon-container {
+  position: relative;
+  display: inline-block;
+
+  .cart-icon {
+    /* Add your cart icon styles */
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .cart-counter {
+    position: absolute;
+    top: 1px;
+    right: -8px;
+    background-color: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    padding: 1px 8px;
+    font-size: 12px;
+  }
+}
+

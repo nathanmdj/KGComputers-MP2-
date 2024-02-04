@@ -2,10 +2,11 @@ import { Card} from 'react-bootstrap';
 import './productCard.scss';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import {Alert, Button} from 'react-bootstrap';
-import ErrorAlert from '../Alerts/ErrorAlert';
+import { useCartContext } from '../../Context/CartContext';
 
 const ProductCard = (props) => {
+    const {updateCartContext, setUpdateCartContext} = useCartContext()
+
     const addToCart = (button) => {
        // Retrieve existing cart from localStorage or create a new one if it doesn't exist
        const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -36,12 +37,12 @@ const ProductCard = (props) => {
          props.variant('danger')
          
        } else {
+         setUpdateCartContext(!updateCartContext)
          existingCart.push(newItem);
 
        // Save the updated cart back to localStorage
          localStorage.setItem('cart', JSON.stringify(existingCart));
          console.log('Item added to cart:', newItem);
-        
          if(button === 'add'){
           props.showAlert('Success')
           props.variant('success')

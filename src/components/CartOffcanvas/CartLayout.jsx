@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './cartLayout.scss';
 import DeleteFromCart from './deleteFromCart';
-
+import { useCartContext } from '../../Context/CartContext';
 const CartLayout = (props) => {
+  const {updateCartContext, setUpdateCartContext} = useCartContext()
   const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
   const [quantity, setQuantity] = useState(existingCart[props.index]?.qty || 0);
   const [subtotal, setSubtotal] = useState('');
@@ -21,22 +22,24 @@ const CartLayout = (props) => {
       
       localStorage.setItem('cart', JSON.stringify(existingCart));
       props.setCartUpdated(!props.cartUpdated)
+      setUpdateCartContext(!updateCartContext)
       updateQuantity(existingCart);
     }
   }
-
+  
   useEffect(() => {
     const newSubtotal = isNaN(quantity) ? 0 : quantity * numericPrice;
     const formattedValue = newSubtotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     setSubtotal(formattedValue);
-  }, [quantity, handleItemDelete]);
-  
 
+    props.setCartUpdated(!props.cartUpdated)
+    
+  }, [quantity]);
+  
+  
   const handleQuantityChange = (e) => {
     const newQuantity = parseInt(e.target.value, 10);
     setQuantity(isNaN(newQuantity) ? '' : newQuantity);
-    setSubtotal(newQuantity * props.price)
-    console.log('inside handle', quantity);
   };
 
   useEffect(() => {
@@ -50,6 +53,7 @@ const CartLayout = (props) => {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   }, [quantity, handleItemDelete]);
 
+  
   return (
     <div className='cart-offcanvas border-bottom'>
       <div className="cart-img">
