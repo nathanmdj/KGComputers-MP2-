@@ -7,11 +7,13 @@ const CartLayout = (props) => {
   const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
   const [quantity, setQuantity] = useState(existingCart[props.index]?.qty || 0);
   const [subtotal, setSubtotal] = useState('');
-  const numericPrice = parseFloat(props.price.replace(/,/g, ''));
+  const [numericPrice, setNumericPrice] = useState(parseFloat(props.price.replace(/,/g, '')));
+  
   
   const updateQuantity = (cart) => {
     const updatedQuantity = cart[props.index]?.qty || 0;
     setQuantity(updatedQuantity);
+    console.log('problem');
   };
 
   const handleItemDelete = (i) => {
@@ -21,20 +23,20 @@ const CartLayout = (props) => {
       existingCart.splice(i,1)
       
       localStorage.setItem('cart', JSON.stringify(existingCart));
-      props.setCartUpdated(!props.cartUpdated)
-      setUpdateCartContext(!updateCartContext)
-      updateQuantity(existingCart);
+      props.setCartUpdated(!props.cartUpdated) //dependecy to re-render off-canvas after delete
+      setUpdateCartContext(!updateCartContext) //this one is to update cart counter after delete
+      updateQuantity(existingCart); //get the lates quantity from localStorage
     }
   }
   
   useEffect(() => {
+
     const newSubtotal = isNaN(quantity) ? 0 : quantity * numericPrice;
     const formattedValue = newSubtotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     setSubtotal(formattedValue);
-
+    setUpdateCartContext(!updateCartContext)
     props.setCartUpdated(!props.cartUpdated)
-    
-  }, [quantity]);
+  }, [quantity, numericPrice]);
   
   
   const handleQuantityChange = (e) => {
@@ -49,8 +51,9 @@ const CartLayout = (props) => {
       }
       return item;
     });
-    
+    console.log('test', numericPrice);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setNumericPrice(parseFloat(props.price.replace(/,/g, '')))
   }, [quantity, handleItemDelete]);
 
   

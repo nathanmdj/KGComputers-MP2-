@@ -13,13 +13,14 @@ export const CartContextProvider = (props) => {
     const fetchData = async () => {
       try {
         const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCartItemsQty(existingCart.length)
+        const itemQty = existingCart.map((item) => item.qty)
+        setCartItemsQty(itemQty.reduce((acc, val) => acc + val, 0))
       } catch (error) {
         console.error('Error fetching data:', error);
         setError(error);
       } 
     };
-    
+    console.log('context');
     fetchData();
   }, [updateCartContext]);
 

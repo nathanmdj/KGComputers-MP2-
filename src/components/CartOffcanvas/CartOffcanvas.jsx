@@ -25,7 +25,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
       }
       return storedCartItems; // Set the state to the latest value
     });
-  
+    console.log('offcanvas');
     setQuantity(storedCartItems.map((item) => item.qty));
   }, [show, cartUpdated]);
   
@@ -34,6 +34,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
       // Make a POST request to your backend API endpoint
       const response = await axios.post(`${backend_url}/cart`, { cartItems: cartItemsToSend });
       setCartDetails(response.data);
+    
     } catch (error) {
       console.error('Error sending cart to backend:', error);
     }
@@ -53,7 +54,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
       const formattedValue = subTotal.reduce((acc, price) => acc + price, 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
       
       setTotal(formattedValue)
-      
+      console.log('hello');
     }
   },[cartDetails, cartItems, quantity])
   
@@ -84,7 +85,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
         ) : (
           <p></p>
         )}
-          <p>{(quantity.length < 1) ? 'Cart Empty' : `Total: ${total}`}</p>
+          <p>{(quantity.length < 1) ? 'Cart Empty' : `Total: ₱ ${total}`}</p>
         </Offcanvas.Body>
       </Offcanvas>
 

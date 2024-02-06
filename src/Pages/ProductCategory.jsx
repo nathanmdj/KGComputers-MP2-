@@ -32,6 +32,18 @@ const ProductCategory = (props) => {
   const handleShowOffcanvas = () => setShowOffcanvas(true);
   const handleCloseOffcanvas = () => setShowOffcanvas(false);
 
+  // Update the title when page page changes
+  useEffect(() => {
+      
+      document.title = `KG Computers | ${props.category}`;
+  
+      
+      return () => {
+        // Cleanup logic
+        document.title = 'KG Computers';
+      };
+  }, [props.category]); 
+
   return (
    
     <div className='container-md mb-3'>

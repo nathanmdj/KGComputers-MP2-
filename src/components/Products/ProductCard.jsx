@@ -14,10 +14,15 @@ const ProductCard = (props) => {
        // Create the new item to add to the cart
        const itemIndex = existingCart.findIndex((item) => props.pID === item.pID)
        
+      //  if item is already in the cart, it will not create a new item on array
+      // instead it will update the quantity property if the item
        if (itemIndex !== -1) {
          existingCart[itemIndex].qty += 1;
          localStorage.setItem('cart', JSON.stringify(existingCart));
-        
+         setUpdateCartContext(!updateCartContext)
+
+      // if the button clicked is cart icon, it will display a succes notif
+      // if it is the buy button it will open the cart offcanvas
          if(button === 'add'){
           props.showAlert('Success')
           props.variant('success')
@@ -27,11 +32,13 @@ const ProductCard = (props) => {
          return
        }
        
+      // object for new item to be added on the localStorage array
        const newItem = {
          pID: props.pID,
          qty: 1
        };
-
+      
+      //  checks if the item is in stock
        if(props.stocks < 1 || props.stocks == undefined) {
          props.showAlert('Error! Item is out of stock')
          props.variant('danger')
