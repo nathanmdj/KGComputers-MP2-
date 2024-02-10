@@ -2,8 +2,10 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import { NavLink, Link } from 'react-router-dom';
 import logoImage from '../../assets/logo.png';
 import './header.scss';
-import Login from '../Login/Login';
+import Login from '../Login/LoginButton';
 import CartButton from '../CartOffcanvas/CartButton';
+import SearchBar from '../Searchbar/Searchbar';
+import LoginButton from '../Login/LoginButton';
 
 
 function Header({onCartButtonClick}) {
@@ -40,16 +42,7 @@ function Header({onCartButtonClick}) {
             onCartButtonClick={onCartButtonClick}
             />
 
-            {/* <button
-              className="border-0 bg-secondary"
-              data-bs-toggle="modal"
-              data-bs-target="#signin"
-            >
-              <i className="bi bi-person"></i>
-              <span>Login</span>
-            </button> */}
-            <Login
-            />
+            <LoginButton/>
               
           
           </div>
@@ -119,7 +112,7 @@ function Header({onCartButtonClick}) {
       </nav>
 
       {/* MENU BAR */}
-      <div className="p-3 p-md-0 d-flex align-items-center  bg-light justify-content-center menu-bar">
+      <div className="p-3 d-flex align-items-center bg-light justify-content-end justify-content-md-center  menu-bar">
         <div className="menu-items">
           <ul className="nav justify-content-center d-none d-md-flex">
             <li>
@@ -182,17 +175,7 @@ function Header({onCartButtonClick}) {
         </div>
 
         <div>
-          <form action="search.html" className="d-flex m-md-3 " role="search">
-            <input
-              className="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button className="btn btn-outline-primary" type="submit">
-              Search
-            </button>
-          </form>
+          <SearchBar/>
         </div>
       </div>
     </header>

@@ -1,7 +1,5 @@
 // CartContext.js
 import React, { createContext, useContext, useState, useEffect} from 'react';
-import CartLayout from '../components/CartOffcanvas/CartLayout';
-
 const CartContext = createContext();
 
 export const CartContextProvider = (props) => {
@@ -20,7 +18,7 @@ export const CartContextProvider = (props) => {
         setError(error);
       } 
     };
-    console.log('context');
+    
     fetchData();
   }, [updateCartContext]);
 

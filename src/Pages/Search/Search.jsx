@@ -1,23 +1,20 @@
 import React, { useContext, useState, useEffect } from 'react';
-import ProductContextProvider, { ProductContext } from '../Context/ProductContext';
 import { Card, Col, Row, Alert } from 'react-bootstrap';
-import ProductCard from '../components/Products/ProductCard';
-import './productCategory.scss'
+import Sort from '../../components/Sort/Sort'
+import { sortProduct } from '../../utils/sort';
+import ProductCard from '../../components/Products/ProductCard';
+import CartOffcanvas from '../../components/CartOffcanvas/CartOffcanvas';
+import { useSeachContext } from '../../Context/SearchContext';
 
-import CartOffcanvas from '../components/CartOffcanvas/CartOffcanvas';
-import Sort from '../components/Sort/Sort';
-import { sortProduct } from '../utils/sort';
-
-
-const ProductCategory = (props) => {
-  const products = useContext(ProductContext);
+const Search = () => {
+  const {searchResult} = useSeachContext()
   const [sortValue, setSortValue] = useState('')
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStyle, setAlertStyle] = useState('');
   
   
-  const sortedProducts = sortProduct(products, sortValue)
+  const sortedProducts = sortProduct(searchResult, sortValue)
   
   const handleShowAlert = (message) => {
     setAlertMessage(message);
@@ -36,14 +33,14 @@ const ProductCategory = (props) => {
   // Update the title when page page changes
   useEffect(() => {
       
-      document.title = `KG Computers | ${props.category}`;
+      document.title = `KG Computers | Search`;
   
       
       return () => {
         // Cleanup logic
         document.title = 'KG Computers';
       };
-  }, [props.category]); 
+  }, []); 
 
   return (
    
@@ -54,14 +51,14 @@ const ProductCategory = (props) => {
         </Alert>
       </div>
       <CartOffcanvas show={showOffcanvas} handleClose={handleCloseOffcanvas} />
-      <h1>{props.category}</h1>
+      <h1>Search</h1>
       <Row>
         <Col className='border d-none d-md-block side-bar' md={3} lg={2}>
           Filter Sidebar
         </Col>
         <Col md={9}>
           <div className='sort'>
-            <p>{(products.length < 1) ? 'No result found' : `Showing 1 - ${products.length} out of ${products.length} products`}</p>
+            <p>{(searchResult.length < 1) ? 'No result found' : `Showing 1 - ${searchResult.length} out of ${searchResult.length} products`}</p>
             <Sort setSortValue={setSortValue}/>
           </div>
           
@@ -86,8 +83,7 @@ const ProductCategory = (props) => {
       </Row>
       
     </div>
-            
-  );
-};
+  )
+}
 
-export default ProductCategory;
+export default Search

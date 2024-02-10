@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Offcanvas, Button } from 'react-bootstrap';
 import axios from 'axios';
 import CartLayout from './CartLayout';
-import { CartContextProvider } from '../../Context/CartContext';
 
 const backend_url = 'http://localhost:5000';
 
@@ -25,13 +24,13 @@ const CartOffcanvas = ({ show, handleClose }) => {
       }
       return storedCartItems; // Set the state to the latest value
     });
-    console.log('offcanvas');
+    
     setQuantity(storedCartItems.map((item) => item.qty));
   }, [show, cartUpdated]);
   
   const sendCartToBackend = async (cartItemsToSend) => {
     try {
-      // Make a POST request to your backend API endpoint
+      
       const response = await axios.post(`${backend_url}/cart`, { cartItems: cartItemsToSend });
       setCartDetails(response.data);
     
@@ -54,7 +53,6 @@ const CartOffcanvas = ({ show, handleClose }) => {
       const formattedValue = subTotal.reduce((acc, price) => acc + price, 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
       
       setTotal(formattedValue)
-      console.log('hello');
     }
   },[cartDetails, cartItems, quantity])
   

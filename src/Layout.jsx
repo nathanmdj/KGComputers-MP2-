@@ -21,7 +21,7 @@ function Layout() {
       <Header 
       onCartButtonClick={handleCartButtonClick}
       style={{ flex: '0 0 auto' }} />
-      <div style={{ flex: '1 0 auto', marginTop: '10em' }}>
+      <div style={{ flex: '1 0 auto', marginTop: '12em' }}>
         <Outlet/>
         <CartOffcanvas show={showOffcanvas} handleClose={handleCloseOffcanvas} />
       </div>

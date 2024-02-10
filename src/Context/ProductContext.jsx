@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../components/Spinner/Spinner';
+import { useSeachContext } from './SearchContext';
 
 export const ProductContext = createContext(null);
 const backend_url = 'http://localhost:5000';
@@ -9,6 +10,7 @@ const ProductContextProvider = (props) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,8 @@ const ProductContextProvider = (props) => {
     fetchData();
   }, [props.category]);
   
+ 
+
   if (loading) {
     // Data is still loading
     return  <Spinner/>

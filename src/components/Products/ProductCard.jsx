@@ -71,7 +71,7 @@ const ProductCard = (props) => {
           
           <Card.Body className="d-flex flex-column">
             <Link
-              to={'/products/description'}
+              to={`/products/description/${props.pID}`}
             >
               <Card.Title>{props.name}</Card.Title>
               <Card.Text>{props.description}</Card.Text>

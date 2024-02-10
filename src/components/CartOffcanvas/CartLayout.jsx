@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './cartLayout.scss';
 import DeleteFromCart from './deleteFromCart';
 import { useCartContext } from '../../Context/CartContext';
+
 const CartLayout = (props) => {
   const {updateCartContext, setUpdateCartContext} = useCartContext()
   const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -13,7 +14,6 @@ const CartLayout = (props) => {
   const updateQuantity = (cart) => {
     const updatedQuantity = cart[props.index]?.qty || 0;
     setQuantity(updatedQuantity);
-    console.log('problem');
   };
 
   const handleItemDelete = (i) => {
@@ -51,7 +51,6 @@ const CartLayout = (props) => {
       }
       return item;
     });
-    console.log('test', numericPrice);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
     setNumericPrice(parseFloat(props.price.replace(/,/g, '')))
   }, [quantity, handleItemDelete]);
