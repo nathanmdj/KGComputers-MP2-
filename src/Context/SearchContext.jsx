@@ -7,7 +7,7 @@ const SeachContext = createContext();
 const backend_url = 'http://localhost:5000';
 
 export const SeachContextProvider = (props) => {
-  const [query, setQuery] = useState('laptop')
+  const [query, setQuery] = useState('')
   const [searchResult, setSearchResult] = useState('')
   const [loading, setLoading] = useState('')
   const [error, setError] = useState('')

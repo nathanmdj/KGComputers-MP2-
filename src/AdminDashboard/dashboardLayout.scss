@@ -1,0 +1,24 @@
+@use '../SASS/customs' as c;
+
+.sidebar-menu {
+  height: 100vh;
+  background-color: c.$gray-900;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000; 
+}
+
+.dashboard-header {
+  background-color: c.$gray-100;
+}
+
+.main-content {
+  @media (min-width: 860px){
+    padding-left: 16.67% !important;
+  }
+  
+}
+
+

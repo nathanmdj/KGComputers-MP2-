@@ -27,7 +27,6 @@ const DescriptionContextProvider = (props) => {
 
     fetchData();
   }, [pID]);
-  
   if (loading) {
     // Data is still loading
     return <Spinner/>;

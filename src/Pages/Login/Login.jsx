@@ -24,10 +24,12 @@ const Login = () => {
       username: username,
       password: password
     }
+    
     postRequest('login', credentials)
       .then(data=>{
         if(data.code === 'success'){
           setIsAuthenticated(true)
+          localStorage.setItem('User', data.loginUser)
           navigate('/')
         } else {
           setErrorAlert(data.error)

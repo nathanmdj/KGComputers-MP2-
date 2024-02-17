@@ -20,11 +20,12 @@
 
 .specs-container {
   @media (min-width: 992px) {
-   margin-top: -400px;
+   margin-block: -400px 400px;
+
   }
 
   @media (min-width: 1200px) {
-   margin-top: -200px;
+   margin-block: -200px 200px;
   }
 }
 

@@ -6,7 +6,6 @@ import Layout from './Layout.jsx'
 import Home from './Pages/Home/Home'
 import ProductCategory from './Pages/ProductCategory'
 import ProductContextProvider, { ProductContext } from './Context/ProductContext'
-import ProductList from './Pages/ProductList/Productlist'
 import Description from './Pages/Description/Description'
 import DescriptionContextProvider from './Context/DescriptionContext'
 import { SeachContextProvider } from './Context/SearchContext'
@@ -14,6 +13,13 @@ import Search from './Pages/Search/Search'
 import Login from './Pages/Login/Login'
 import { AuthContextProvider } from './Context/AuthContext'
 import Register from './Pages/Login/Register'
+import ProductList from './AdminDashboard/Pages/ProductList/Productlist'
+import AddProduct from './AdminDashboard/Pages/ProductList/AddProduct'
+import DashboardLayout from './AdminDashboard/DashboardLayout'
+import UpdateProduct from './AdminDashboard/components/ProductForm/UpdateProduct'
+import Checkout from './Pages/Checkout/Checkout'
+import UserProfile from './Pages/UserProfile/UserProfile'
+import OrderHistory from './Pages/UserProfile/OrderHistory'
 
 
 
@@ -21,13 +27,26 @@ import Register from './Pages/Login/Register'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
-      
+      <Route path='dashboard' element={<DashboardLayout/>}>
+        <Route path='product-list' element={<ProductList/>}/>
+        <Route path='product-list/add-product' element={<AddProduct/>}/>
+        <Route path='product-list/update-product' element={
+          <DescriptionContextProvider>
+            <UpdateProduct/>
+          </DescriptionContextProvider>}>
+          <Route path=':pID' element={<UpdateProduct/>}/>
+        </Route>
+      </Route>
 
       <Route path='' element={<Layout/>}>
         <Route path='' element={<Home/>}/>
         <Route path='search' element={<Search/>}/>
         <Route path='login' element={<Login/>}/>
         <Route path='register' element={<Register/>}/>
+        <Route path='user-profile' element={<UserProfile/>}>
+          <Route path='order-history' element={<OrderHistory/>}/>
+
+        </Route>
         
         <Route path='desktop' element={
             <ProductContextProvider category='desktop'>
@@ -49,14 +68,14 @@ const router = createBrowserRouter(
               <ProductCategory category='Components'/>
             </ProductContextProvider>
           }/>
-        <Route path='product-list' element={<ProductList/>}/>
+        
         <Route path='products/description' element={ 
               <DescriptionContextProvider>
                 <Description/>
               </DescriptionContextProvider>}>
             <Route path=':pID' element={<Description/>}/>
         </Route>
-
+        <Route path='checkout' element={<Checkout/>}/>
       </Route>
     </Route>
     

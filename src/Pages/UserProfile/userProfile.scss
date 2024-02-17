@@ -1,0 +1,25 @@
+@use '../../SASS/customs' as c;
+
+.user-profile {
+  height: 600px;
+  background-color: c.$gray-100;
+  .profile-sidebar {
+    width: 200px;
+    height: 100%;
+    a {
+      color: white;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-bottom: 100px;
+    }
+  }
+  .user-order-table {
+    th {
+      background-color: c.$gray-100;
+    }
+  }
+}

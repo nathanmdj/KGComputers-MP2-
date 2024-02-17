@@ -1,0 +1,19 @@
+@use '../../../SASS/customs' as c;
+
+.sidebar-nav {
+  .brand {
+    height: 200px;
+  }
+
+  .nav-menu {
+
+    a {
+      color: white;
+      font-size: 1.15rem;
+      padding: 10px 0;
+      &:hover {
+        color: c.$primary;
+      }
+    }
+  }
+}

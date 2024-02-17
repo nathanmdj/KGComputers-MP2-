@@ -18,7 +18,9 @@ const handleLogin = () => {
 
 const handleLogout = () => {
   setIsAuthenticated(false)
+  localStorage.removeItem('User')
 }
+
   return (
     <div>
       
@@ -43,7 +45,8 @@ const handleLogout = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu className='text-black'>
-            <Dropdown.Item>Profile</Dropdown.Item>
+            <Dropdown.Item 
+            onClick={()=>navigate('/user-profile')}>Profile</Dropdown.Item>
             <Dropdown.Item>Profile</Dropdown.Item>
             <Dropdown.Item 
             onClick={handleLogout}

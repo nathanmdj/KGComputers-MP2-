@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './cartLayout.scss';
-import DeleteFromCart from './deleteFromCart';
+import DeleteFromCart from './DeleteFromCart';
 import { useCartContext } from '../../Context/CartContext';
 
 const CartLayout = (props) => {
