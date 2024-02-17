@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Offcanvas, Button } from 'react-bootstrap';
 import axios from 'axios';
 import CartLayout from './CartLayout';
+import { useNavigate } from 'react-router-dom';
+import { useCartContext } from '../../Context/CartContext';
 
 const backend_url = 'http://localhost:5000';
 
 const CartOffcanvas = ({ show, handleClose }) => {
+  const navigate = useNavigate();
+  const {setCheckoutCart, setCheckoutTotal} = useCartContext()
   const [cartItems, setCartItems] = useState([]);
   const [cartDetails, setCartDetails] = useState(null);
   const [cartUpdated, setCartUpdated] = useState(false);
@@ -56,7 +60,14 @@ const CartOffcanvas = ({ show, handleClose }) => {
     }
   },[cartDetails, cartItems, quantity])
   
-  
+  const handleCheckout = () => {
+   
+    setCheckoutCart(cartDetails)
+    setCheckoutTotal(total)
+    navigate('/checkout')
+    handleClose()
+  }
+
   return (
     <>
       <Offcanvas show={show} onHide={handleClose} placement='end'>
@@ -84,6 +95,12 @@ const CartOffcanvas = ({ show, handleClose }) => {
           <p></p>
         )}
           <p>{(quantity.length < 1) ? 'Cart Empty' : `Total: ₱ ${total}`}</p>
+          <div className="offcanvas-btn d-flex justify-content-end gap-2">
+            <Button className='bg-info text-white border-0 '
+            onClick={handleClose}>Continue Shopping</Button>
+            <Button className='text-white'
+            onClick={()=>handleCheckout()}>Checkout</Button>
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
 

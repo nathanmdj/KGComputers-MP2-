@@ -20,6 +20,7 @@ import UpdateProduct from './AdminDashboard/components/ProductForm/UpdateProduct
 import Checkout from './Pages/Checkout/Checkout'
 import UserProfile from './Pages/UserProfile/UserProfile'
 import OrderHistory from './Pages/UserProfile/OrderHistory'
+import { CartContextProvider } from './Context/CartContext'
 
 
 
@@ -27,6 +28,8 @@ import OrderHistory from './Pages/UserProfile/OrderHistory'
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
+      <Route path='checkout' element={<Checkout/>}/>
+
       <Route path='dashboard' element={<DashboardLayout/>}>
         <Route path='product-list' element={<ProductList/>}/>
         <Route path='product-list/add-product' element={<AddProduct/>}/>
@@ -75,7 +78,7 @@ const router = createBrowserRouter(
               </DescriptionContextProvider>}>
             <Route path=':pID' element={<Description/>}/>
         </Route>
-        <Route path='checkout' element={<Checkout/>}/>
+       
       </Route>
     </Route>
     
@@ -87,9 +90,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthContextProvider>
       <SeachContextProvider>
-        <ProductContextProvider>
-          <RouterProvider router={router}/>
-        </ProductContextProvider>
+        <CartContextProvider>
+          <ProductContextProvider>
+            <RouterProvider router={router}/>
+          </ProductContextProvider>
+        </CartContextProvider>
       </SeachContextProvider>    
     </AuthContextProvider>
   </React.StrictMode>,

@@ -6,7 +6,10 @@ export const CartContextProvider = (props) => {
  
   const [cartItemsQty, setCartItemsQty] = useState(null);
   const [updateCartContext, setUpdateCartContext] = useState(false)
+  const [checkoutCart, setCheckoutCart] = useState([])
+  const [checkoutTotal, setCheckoutTotal] = useState(0)
 
+  // cart counter
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,8 +25,13 @@ export const CartContextProvider = (props) => {
     fetchData();
   }, [updateCartContext]);
 
+  useEffect(()=> {
+    console.log(checkoutCart);
+    console.log(checkoutTotal);
+  },[checkoutCart, updateCartContext])
+
   return (
-    <CartContext.Provider value={{cartItemsQty, updateCartContext, setUpdateCartContext}}>
+    <CartContext.Provider value={{cartItemsQty, updateCartContext, setUpdateCartContext, checkoutCart, setCheckoutCart, checkoutTotal, setCheckoutTotal}}>
       {props.children}
     </CartContext.Provider>
 
