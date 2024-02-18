@@ -9,7 +9,7 @@ const backend_url = 'http://localhost:5000';
 
 const CartOffcanvas = ({ show, handleClose }) => {
   const navigate = useNavigate();
-  const {setCheckoutCart, setCheckoutTotal} = useCartContext()
+  const {setCheckoutCart, setCheckoutTotal, setCheckoutQty} = useCartContext()
   const [cartItems, setCartItems] = useState([]);
   const [cartDetails, setCartDetails] = useState(null);
   const [cartUpdated, setCartUpdated] = useState(false);
@@ -61,7 +61,8 @@ const CartOffcanvas = ({ show, handleClose }) => {
   },[cartDetails, cartItems, quantity])
   
   const handleCheckout = () => {
-   
+    setCheckoutQty(quantity)
+    console.log(quantity);
     setCheckoutCart(cartDetails)
     setCheckoutTotal(total)
     navigate('/checkout')
@@ -95,7 +96,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
           <p></p>
         )}
           <p>{(quantity.length < 1) ? 'Cart Empty' : `Total: ₱ ${total}`}</p>
-          <div className="offcanvas-btn d-flex justify-content-end gap-2">
+          <div className={`offcanvas-btn d-flex justify-content-end gap-2 ${(quantity.length < 1) ? 'd-none' : ''}`}>
             <Button className='bg-info text-white border-0 '
             onClick={handleClose}>Continue Shopping</Button>
             <Button className='text-white'

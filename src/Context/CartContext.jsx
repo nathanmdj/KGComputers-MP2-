@@ -8,6 +8,7 @@ export const CartContextProvider = (props) => {
   const [updateCartContext, setUpdateCartContext] = useState(false)
   const [checkoutCart, setCheckoutCart] = useState([])
   const [checkoutTotal, setCheckoutTotal] = useState(0)
+  const [checkoutQty, setCheckoutQty] = useState(0)
 
   // cart counter
   useEffect(() => {
@@ -31,7 +32,7 @@ export const CartContextProvider = (props) => {
   },[checkoutCart, updateCartContext])
 
   return (
-    <CartContext.Provider value={{cartItemsQty, updateCartContext, setUpdateCartContext, checkoutCart, setCheckoutCart, checkoutTotal, setCheckoutTotal}}>
+    <CartContext.Provider value={{cartItemsQty, updateCartContext, setUpdateCartContext, checkoutCart, setCheckoutCart, checkoutTotal, setCheckoutTotal, checkoutQty, setCheckoutQty}}>
       {props.children}
     </CartContext.Provider>
 

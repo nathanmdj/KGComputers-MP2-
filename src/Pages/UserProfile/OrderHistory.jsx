@@ -35,7 +35,7 @@ const OrderHistory = () => {
               <td>{order.order_id}</td>
               <td>{order.date}</td>
               <td>{order.items.join(', ')}</td>
-              <td>{order.total}</td>
+              <td>₱ {order.total}</td>
               <td>{order.status}</td>
             </tr>
             

@@ -21,6 +21,8 @@ import Checkout from './Pages/Checkout/Checkout'
 import UserProfile from './Pages/UserProfile/UserProfile'
 import OrderHistory from './Pages/UserProfile/OrderHistory'
 import { CartContextProvider } from './Context/CartContext'
+import Succes from './Pages/Checkout/Succes'
+import Main from './AdminDashboard/Pages/ProductList/Main/Main'
 
 
 
@@ -29,8 +31,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
       <Route path='checkout' element={<Checkout/>}/>
+      <Route path='purchase-success' element={<Succes/>}/>
 
       <Route path='dashboard' element={<DashboardLayout/>}>
+        <Route path='' element={<Main/>}/>
         <Route path='product-list' element={<ProductList/>}/>
         <Route path='product-list/add-product' element={<AddProduct/>}/>
         <Route path='product-list/update-product' element={
