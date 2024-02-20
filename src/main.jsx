@@ -37,12 +37,7 @@ const router = createBrowserRouter(
         <Route path='' element={<Main/>}/>
         <Route path='product-list' element={<ProductList/>}/>
         <Route path='product-list/add-product' element={<AddProduct/>}/>
-        <Route path='product-list/update-product' element={
-          <DescriptionContextProvider>
-            <UpdateProduct/>
-          </DescriptionContextProvider>}>
-          <Route path=':pID' element={<UpdateProduct/>}/>
-        </Route>
+        <Route path='product-list/update-product/:pID' element={<UpdateProduct/>}/>
       </Route>
 
       <Route path='' element={<Layout/>}>
@@ -96,7 +91,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <SeachContextProvider>
         <CartContextProvider>
           <ProductContextProvider>
-            <RouterProvider router={router}/>
+            <DescriptionContextProvider>
+              <RouterProvider router={router}/>
+            </DescriptionContextProvider>
           </ProductContextProvider>
         </CartContextProvider>
       </SeachContextProvider>    

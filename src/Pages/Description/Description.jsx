@@ -7,7 +7,7 @@ import DescriptionSidebar from './DescripSidebar'
 
 const Description = () => {
   const product = useContext(DescriptionContext)
-  const item = product[0];
+  const item = product[0] || [];
   const availabilitStyle = {
     color: item.stocks < 1 || item.stocks === undefined ? 'red' : 'green',
   }

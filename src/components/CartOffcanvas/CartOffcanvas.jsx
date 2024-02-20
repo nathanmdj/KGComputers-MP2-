@@ -4,8 +4,9 @@ import axios from 'axios';
 import CartLayout from './CartLayout';
 import { useNavigate } from 'react-router-dom';
 import { useCartContext } from '../../Context/CartContext';
+import { postRequest } from '../../utils/apiRequest';
 
-const backend_url = 'http://localhost:5000';
+
 
 const CartOffcanvas = ({ show, handleClose }) => {
   const navigate = useNavigate();
@@ -33,14 +34,18 @@ const CartOffcanvas = ({ show, handleClose }) => {
   }, [show, cartUpdated]);
   
   const sendCartToBackend = async (cartItemsToSend) => {
-    try {
+    // try {
       
-      const response = await axios.post(`${backend_url}/cart`, { cartItems: cartItemsToSend });
-      setCartDetails(response.data);
-    
-    } catch (error) {
-      console.error('Error sending cart to backend:', error);
-    }
+    //   const response = await axios.post(`${backend_url}/cart`, { cartItems: cartItemsToSend });
+    //   setCartDetails(response.data);
+      
+    // } catch (error) {
+    //   console.error('Error sending cart to backend:', error);
+    // }
+    postRequest('cart', {cartItems: cartItemsToSend})
+      .then((data)=>{
+        setCartDetails(data)
+      })
   };
 
   // calculating Total, had a hard time adding subtotal from cartlayout component. 

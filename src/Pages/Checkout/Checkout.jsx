@@ -11,6 +11,12 @@ const Checkout = () => {
   const {isAuthenticated} = useAuthContext();
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if (checkoutCart.length === 0){
+      navigate('/')
+    }
+  }, [checkoutCart])
+  
   useEffect(()=> {
     if (!isAuthenticated){
       navigate('/login')
@@ -18,7 +24,8 @@ const Checkout = () => {
   },[isAuthenticated])
 
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = (e) => {
+    e.preventDefault()
     const user = localStorage.getItem('User') || '';
     const newOrder = {
       items: checkoutCart.map((item)=> item.name),
@@ -62,11 +69,7 @@ const Checkout = () => {
           )}
           <div className="total mt-5">
             <h5>Total ₱ {checkoutTotal}</h5>
-          </div>
-          <div className="place-order d-flex justify-content-center pt-3">
-            <Button
-            onClick={()=>handlePlaceOrder()}>Complete Order</Button>
-          </div>        
+          </div>     
         </div>
 
 
@@ -106,7 +109,8 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <button className="purchase--btn">Checkout</button>
+              <button className="purchase--btn"
+              onClick={(e)=>handlePlaceOrder(e)}>Checkout</button>
             </form>
           </div>
         </div>

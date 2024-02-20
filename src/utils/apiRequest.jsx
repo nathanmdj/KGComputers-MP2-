@@ -3,7 +3,6 @@ import axios from 'axios';
 const backend_url = 'http://localhost:5000';
 
 export const postRequest = (route, body) => {  
-  console.log(body);
   const fetchData = async () => {
     try {
       const response = await axios.post(`${backend_url}/${route}`, body);

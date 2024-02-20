@@ -15,6 +15,7 @@ const Register = () => {
   const [lastname, setLastname] = useState('')
   const [address, setAddress] = useState('')
   const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
   const [errorAlert, setErrorAlert] = useState('')
 
 
@@ -24,6 +25,7 @@ const Register = () => {
       firstname: firstname,
       lastname: lastname,
       address: address,
+      phone: phone,
       email: email,
       username: username,
       password: password
@@ -93,6 +95,14 @@ const Register = () => {
               setErrorAlert('')
               setEmail(e.target.value)}}/>
             <label className="label text-primary" htmlFor="input">Email</label>
+          </div>
+          <div className="input-field">
+            <input required className="input" type="text" 
+            value={phone}
+            onChange={(e)=>{
+              setErrorAlert('')
+              setPhone(e.target.value)}}/>
+            <label className="label text-primary" htmlFor="input">Phone</label>
           </div>
           <div className="input-field">
             <input required className="input" type="text" 

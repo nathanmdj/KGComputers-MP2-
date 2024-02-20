@@ -26,11 +26,6 @@ export const CartContextProvider = (props) => {
     fetchData();
   }, [updateCartContext]);
 
-  useEffect(()=> {
-    console.log(checkoutCart);
-    console.log(checkoutTotal);
-  },[checkoutCart, updateCartContext])
-
   return (
     <CartContext.Provider value={{cartItemsQty, updateCartContext, setUpdateCartContext, checkoutCart, setCheckoutCart, checkoutTotal, setCheckoutTotal, checkoutQty, setCheckoutQty}}>
       {props.children}

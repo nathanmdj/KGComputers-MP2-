@@ -4,11 +4,13 @@ import './productForm.scss'
 import { getRequest, postRequest, putRequest } from '../../../utils/apiRequest';
 import { useNavigate, useParams } from 'react-router-dom';
 import TextEditor from '../MCETextEditor/MCETextEditor';
-import { DescriptionContext } from '../../../Context/DescriptionContext';
+// import { DescriptionContext } from '../../../Context/DescriptionContext';
 
-const InputField = ({label, type, isInput, setValue, value, setErrorAlert} ) => {
+const InputField = ({label, type, isInput, xValue, setErrorAlert} ) => {
   const [isValid, setIsValid] = useState(true);
+  const [value, setValue] = useState(xValue);
   
+ 
   const handleChange = (e) => {
     setIsValid(e.target.validity.valid)
     setValue(e.target.value)
@@ -47,20 +49,52 @@ const InputField = ({label, type, isInput, setValue, value, setErrorAlert} ) => 
 
 const UpdateProduct = () => {
   const {pID} = useParams()
-  const products = useContext(DescriptionContext)
-  
   const navigate = useNavigate();
-  const [product, setProduct] = useState(products[0]);
-  const [productName, setProductName] = useState(product.name);
-  const [category, setCategory] = useState(product.category);
-  const [description, setDescription] = useState(product.description);
-  const [price, setPrice] = useState(Number(product.price.replace(/,/g, "")));
-  const [stocks, setStocks] = useState(product.stocks || 0);
-  const [imageUrl, setImageUrl] = useState(product.imageUrl);
-  const [tags, setTags] = useState(product.tags || '');
-  const [erroAlert, setErrorAlert] = useState('');
-  const [specs, setSpecs] = useState(product.specs || '');
+  const [product, setProduct] = useState([]);
+ 
   
+  // const [productName, setProductName] = useState(product.name);
+  // const [category, setCategory] = useState(product.category);
+  // const [description, setDescription] = useState(product.description);
+  // const [price, setPrice] = useState(Number(product.price.replace(/,/g, "")));
+  // const [stocks, setStocks] = useState(product.stocks || 0);
+  // const [imageUrl, setImageUrl] = useState(product.imageUrl);
+  // const [tags, setTags] = useState(product.tags || '');
+  // const [erroAlert, setErrorAlert] = useState('');
+  // const [specs, setSpecs] = useState(product.specs || '');
+  
+  const [productName, setProductName] = useState('');
+  const [category, setCategory] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [stocks, setStocks] = useState(0);
+  const [imageUrl, setImageUrl] = useState('');
+  const [tags, setTags] = useState('');
+  const [erroAlert, setErrorAlert] = useState('');
+  const [specs, setSpecs] = useState('');
+
+  useEffect(()=>{
+    getRequest(`description/${pID}`)
+      .then((data)=>{
+        setProduct(data[0])
+      })
+  },[pID]);
+
+  useEffect(()=>{
+    setProductName(product.name)
+    setCategory(product.category)
+    setPrice(()=>{
+      if(product.price){
+        return Number(product.price.replace(/,/g, ""))
+      }
+    })
+    setDescription(product.description)
+    setStocks(product.stocks)
+    setImageUrl(product.imageUrl)
+    setTags(product.tags)
+    setSpecs(product.specs)
+  },[product])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const updatedProduct = {
@@ -85,10 +119,14 @@ const UpdateProduct = () => {
     putRequest(`update-product/${pID}`, updatedProduct)
       .then((data) => {
         console.log(data);
-      })
-
+       
+      })  
+      .catch((error) => {
+        console.error('Error updating product:', error);
+        // Handle error if needed
+      });
     
-    navigate('/dashboard/product-list')
+      navigate('/dashboard/product-list')
   }
 
   return (
@@ -100,8 +138,8 @@ const UpdateProduct = () => {
             <InputField
             label={'Product Name'}
             type={'text'}
-            setValue={setProductName}
-            value={productName}
+            setXValue={setProductName}
+            xValue={productName}
             isInput={true}
             setErrorAlert={setErrorAlert}
             />
@@ -109,8 +147,8 @@ const UpdateProduct = () => {
             <InputField
             label={'Category'}
             type={'text'}
-            setValue={setCategory}
-            value={category}
+            setXValue={setCategory}
+            xValue={category}
             isInput={false}
             setErrorAlert={setErrorAlert}
             />
@@ -119,8 +157,8 @@ const UpdateProduct = () => {
           <InputField
           label={'Description'}
           type={'text'}
-          setValue={setDescription}
-          value={description}
+          setXValue={setDescription}
+          xValue={description}
           isInput={true}
           setErrorAlert={setErrorAlert}/>
 
@@ -128,16 +166,16 @@ const UpdateProduct = () => {
             <InputField
             label={'Price'}
             type={'number'}
-            setValue={setPrice}
-            value={price}
+            setXValue={setPrice}
+            xValue={price}
             isInput={true}
             setErrorAlert={setErrorAlert}/>
 
             <InputField
             label={'Stocks'}
             type={'number'}
-            setValue={setStocks}
-            value={stocks}
+            setXValue={setStocks}
+            xValue={stocks}
             isInput={true}
             setErrorAlert={setErrorAlert}/>
           </div>
@@ -146,16 +184,16 @@ const UpdateProduct = () => {
             <InputField
             label={'Image Url'}
             type={'text'}
-            setValue={setImageUrl}
-            value={imageUrl}
+            setXValue={setImageUrl}
+            xValue={imageUrl}
             isInput={true}
             setErrorAlert={setErrorAlert}/>
             
             <InputField
             label={'Tags'}
             type={'text'}
-            setValue={setTags}
-            value={tags}
+            setXValue={setTags}
+            xValue={tags}
             isInput={true}
             setErrorAlert={setErrorAlert}/>
           </div>

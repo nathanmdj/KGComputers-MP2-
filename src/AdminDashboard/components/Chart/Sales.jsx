@@ -26,9 +26,10 @@ const SalesChart = () => {
 
   const last7Days = getLast7Days().reverse();
   console.log(last7Days);
+  
   return (
-    <div className='p-3 ps-md-5'>
-      <h3>Sales in last 7 days</h3>
+    <div className='w-75'>
+      <h4>Sales in last 7 days</h4>
       <Line data={{
         labels: last7Days,
         datasets: [

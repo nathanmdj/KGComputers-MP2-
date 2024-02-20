@@ -1,10 +1,11 @@
 // SeachContext.js
 import React, { createContext, useContext, useState, useEffect} from 'react';
 import axios from 'axios';
+import { getRequest } from '../utils/apiRequest';
 
 
 const SeachContext = createContext();
-const backend_url = 'http://localhost:5000';
+const backend_url = 'https://kgcomputers.onrender.com';
 
 export const SeachContextProvider = (props) => {
   const [query, setQuery] = useState('')
@@ -14,32 +15,42 @@ export const SeachContextProvider = (props) => {
   
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${backend_url}/search?query=${query}`);
-        setSearchResult(response.data)
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await axios.get(`${backend_url}/search?query=${query}`);
+    //     setSearchResult(response.data)
         
-      } catch (error) {
+    //   } catch (error) {
+    //     console.error('Error fetching data:', error);
+    //     setError(error);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // fetchData();
+
+
+    getRequest(`search?query=${query}`)
+      .then((data)=>{
+        setSearchResult(data)
+      })
+      .catch((error)=>{
         console.error('Error fetching data:', error);
         setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+      })
   }, [query]);
   
-  if (loading) {
-    // Data is still loading
-    return  <Spinner/>
+  // if (loading) {
+  //   // Data is still loading
+  //   return  <Spinner/>
     
-  }
+  // }
 
-  if (error) {
-    // Error occurred while fetching data
-    return <div>Error fetching data: {error.message}</div>;
-  }
+  // if (error) {
+  //   // Error occurred while fetching data
+  //   return <div>Error fetching data: {error.message}</div>;
+  // }
 
 
   return (

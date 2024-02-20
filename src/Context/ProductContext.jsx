@@ -2,9 +2,10 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import Spinner from '../components/Spinner/Spinner';
 import { useSeachContext } from './SearchContext';
+import { getRequest } from '../utils/apiRequest';
 
 export const ProductContext = createContext(null);
-const backend_url = 'http://localhost:5000';
+// const backend_url = 'https://kgcomputers.onrender.com';
 
 const ProductContextProvider = (props) => {
   const [products, setProducts] = useState([]);
@@ -13,19 +14,29 @@ const ProductContextProvider = (props) => {
   
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${backend_url}/products/${props.category}`);
-        setProducts(response.data)
-      } catch (error) {
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await axios.get(`${backend_url}/products/${props.category}`);
+    //     setProducts(response.data)
+    //   } catch (error) {
+    //     console.error('Error fetching data:', error);
+    //     setError(error);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // };
+
+    // fetchData();
+
+    getRequest(`products/${props.category}`)
+      .then((data)=>{
+        setProducts(data)
+      })
+      .catch((error)=>{
         console.error('Error fetching data:', error);
         setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+      })
+      .finally(()=>setLoading(false))
   }, [props.category]);
   
  
