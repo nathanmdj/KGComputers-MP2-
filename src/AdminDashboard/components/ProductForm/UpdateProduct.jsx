@@ -4,25 +4,27 @@ import './productForm.scss'
 import { getRequest, postRequest, putRequest } from '../../../utils/apiRequest';
 import { useNavigate, useParams } from 'react-router-dom';
 import TextEditor from '../MCETextEditor/MCETextEditor';
+import Spinner from '../../../components/Spinner/Spinner';
+import { useProductUpdateContext } from '../../../Context/ProductUpdateContext';
 // import { DescriptionContext } from '../../../Context/DescriptionContext';
 
-const InputField = ({label, type, isInput, xValue, setErrorAlert} ) => {
+const InputField = ({label, type, isInput, xValue, setErrorAlert, setXValue} ) => {
   const [isValid, setIsValid] = useState(true);
-  const [value, setValue] = useState(xValue);
   
- 
+
   const handleChange = (e) => {
     setIsValid(e.target.validity.valid)
-    setValue(e.target.value)
+    setXValue(e.target.value)
     setErrorAlert('')
   }
 
   useEffect(() => {
-    if (value === '') {
+    if (xValue === '') {
       setIsValid(false)
     }
-  }, [value])
+  }, [xValue])
 
+  
   return (
   <Form.Group className='input-field'>
     <Form.Control 
@@ -30,9 +32,9 @@ const InputField = ({label, type, isInput, xValue, setErrorAlert} ) => {
       className={`input ${isValid ? 'valid-input': ''} ${isInput ? '' : 'd-none'}`}
       onChange={handleChange}
       isValid={isValid}
-      value={value}/>
+      value={xValue}/>
     <Form.Select className={`input ${isValid ? 'valid-input': ''} ${isInput ? 'd-none' : ''}`}
-      value={value}
+      value={xValue}
       isValid={isValid}
       onChange={handleChange}>
       <option value=''></option>
@@ -49,20 +51,9 @@ const InputField = ({label, type, isInput, xValue, setErrorAlert} ) => {
 
 const UpdateProduct = () => {
   const {pID} = useParams()
+  const {productToUpdate, update} = useProductUpdateContext()
   const navigate = useNavigate();
-  const [product, setProduct] = useState([]);
- 
-  
-  // const [productName, setProductName] = useState(product.name);
-  // const [category, setCategory] = useState(product.category);
-  // const [description, setDescription] = useState(product.description);
-  // const [price, setPrice] = useState(Number(product.price.replace(/,/g, "")));
-  // const [stocks, setStocks] = useState(product.stocks || 0);
-  // const [imageUrl, setImageUrl] = useState(product.imageUrl);
-  // const [tags, setTags] = useState(product.tags || '');
-  // const [erroAlert, setErrorAlert] = useState('');
-  // const [specs, setSpecs] = useState(product.specs || '');
-  
+  const [product, setProduct] = useState('');
   const [productName, setProductName] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
@@ -70,15 +61,14 @@ const UpdateProduct = () => {
   const [stocks, setStocks] = useState(0);
   const [imageUrl, setImageUrl] = useState('');
   const [tags, setTags] = useState('');
-  const [erroAlert, setErrorAlert] = useState('');
   const [specs, setSpecs] = useState('');
+  const [erroAlert, setErrorAlert] = useState('');
+  
 
   useEffect(()=>{
-    getRequest(`description/${pID}`)
-      .then((data)=>{
-        setProduct(data[0])
-      })
-  },[pID]);
+    setProduct(productToUpdate)
+  },[update])
+
 
   useEffect(()=>{
     setProductName(product.name)
@@ -95,6 +85,8 @@ const UpdateProduct = () => {
     setSpecs(product.specs)
   },[product])
 
+  
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const updatedProduct = {
@@ -110,16 +102,14 @@ const UpdateProduct = () => {
     }
     
     const isEmpty = Object.values(updatedProduct).some(value => value === '');
-
-    if(isEmpty){
+    console.log('specs',specs);
+    if(isEmpty || specs === undefined){
       setErrorAlert('Some fields are empty!')
       return
     }
 
     putRequest(`update-product/${pID}`, updatedProduct)
-      .then((data) => {
-        console.log(data);
-       
+      .then((data) => {       
       })  
       .catch((error) => {
         console.error('Error updating product:', error);
@@ -129,8 +119,16 @@ const UpdateProduct = () => {
       navigate('/dashboard/product-list')
   }
 
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+   while(isEmpty(product)){
+    return <Spinner/>
+   }
   return (
+    
     <div className='d-flex justify-content-center mt-5'>
+      
       <div className="w-75 product-form-container">
         <Form className='p-3 border rounded-3 form-controls'>
           <Form.Text className='title'>Update Product</Form.Text>

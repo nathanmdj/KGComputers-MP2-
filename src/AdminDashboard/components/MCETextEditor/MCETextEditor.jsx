@@ -10,13 +10,13 @@ const TextEditor = ({setSpecs, specs}) => {
   const handleEditorChange = () => {
     const editor = editorRef.current;
     const editorContent = editor.getContent();
-    setTextEditorContent(editorContent)
+    setSpecs(editorContent)
   }
   
-  
   useEffect(() => {
-    setSpecs(textEditorContent)
-  }, [textEditorContent])
+    if(str === undefined || str === '')
+    setStr(specs)
+  }, [specs])
   
   return (
     <div className=' d-flex justify-content-center flex-wrap'>

@@ -23,6 +23,7 @@ import OrderHistory from './Pages/UserProfile/OrderHistory'
 import { CartContextProvider } from './Context/CartContext'
 import Succes from './Pages/Checkout/Succes'
 import Main from './AdminDashboard/Pages/ProductList/Main/Main'
+import { ProductUpdateContextProvider } from './Context/ProductUpdateContext'
 
 
 
@@ -37,7 +38,18 @@ const router = createBrowserRouter(
         <Route path='' element={<Main/>}/>
         <Route path='product-list' element={<ProductList/>}/>
         <Route path='product-list/add-product' element={<AddProduct/>}/>
-        <Route path='product-list/update-product/:pID' element={<UpdateProduct/>}/>
+        <Route path='product-list/update-product' element={
+            <ProductUpdateContextProvider>
+
+              <UpdateProduct/>
+
+            </ProductUpdateContextProvider>
+            
+            
+            }>
+
+         <Route path=':pID' element={<UpdateProduct/>}/>
+        </Route>
       </Route>
 
       <Route path='' element={<Layout/>}>
@@ -92,7 +104,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <CartContextProvider>
           <ProductContextProvider>
             <DescriptionContextProvider>
-              <RouterProvider router={router}/>
+                <RouterProvider router={router}/>
+
+              
             </DescriptionContextProvider>
           </ProductContextProvider>
         </CartContextProvider>

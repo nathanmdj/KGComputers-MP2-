@@ -71,9 +71,9 @@ const ProductForm = () => {
       specs: specs
     }
 
-    const isEmpty = Object.values(newProduct).some(value => value === '');
-
-    if(isEmpty){
+    const isEmpty = Object.values(newProduct).some(value => value === '' || undefined);
+    console.log(specs);
+    if(isEmpty || specs === undefined){
       setErrorAlert('Some fields are empty!')
       return
     }
