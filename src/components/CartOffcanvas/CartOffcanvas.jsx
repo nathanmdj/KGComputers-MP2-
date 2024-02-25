@@ -34,17 +34,12 @@ const CartOffcanvas = ({ show, handleClose }) => {
   }, [show, cartUpdated]);
   
   const sendCartToBackend = async (cartItemsToSend) => {
-    // try {
-      
-    //   const response = await axios.post(`${backend_url}/cart`, { cartItems: cartItemsToSend });
-    //   setCartDetails(response.data);
-      
-    // } catch (error) {
-    //   console.error('Error sending cart to backend:', error);
-    // }
-    postRequest('cart', {cartItems: cartItemsToSend})
+    postRequest('cart', cartItemsToSend)
       .then((data)=>{
         setCartDetails(data)
+      })
+      .catch((error)=>{
+        console.log(error);
       })
   };
 
@@ -100,7 +95,7 @@ const CartOffcanvas = ({ show, handleClose }) => {
         ) : (
           <p></p>
         )}
-          <p>{(quantity.length < 1) ? 'Cart Empty' : `Total: ₱ ${total}`}</p>
+          <h5 className='py-3'>{(quantity.length < 1) ? 'Cart Empty' : `Total: ₱ ${total}`}</h5>
           <div className={`offcanvas-btn d-flex justify-content-end gap-2 ${(quantity.length < 1) ? 'd-none' : ''}`}>
             <Button className='bg-info text-white border-0 '
             onClick={handleClose}>Continue Shopping</Button>

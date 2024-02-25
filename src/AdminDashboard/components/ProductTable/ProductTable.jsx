@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Table } from 'react-bootstrap'
+import { Button, OverlayTrigger, Table, Tooltip } from 'react-bootstrap'
 import {getRequest } from '../../../utils/apiRequest'
-import { Trash } from 'react-bootstrap-icons'
+import { PenFill, TrashFill } from 'react-bootstrap-icons'
 import './productTable.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
@@ -56,13 +56,34 @@ const ProductTable = () => {
               <td>{item.category.toUpperCase()}</td>
               <td className='text-end'><span>&#8369;</span>{`${item.price}`}</td>
               <td className='text-end col-1'>{item.stocks || 0} </td>
-              <td className='fit col-2 text-nowrap'>
-              <Button variant='info' className='me-1'
-              as={Link} to={`update-product/${item.pID}`}
-              >Update</Button> 
-              <Button variant='danger'
-                onClick={()=>{handleItemDelete(item.pID)}}
-              ><Trash/></Button> 
+              <td className='fit col-2 col-lg-1 text-nowrap'>
+                <div className="action-btns">
+                    
+                  <OverlayTrigger
+                    placement='bottom'
+                    overlay={
+                      <Tooltip>
+                        update
+                      </Tooltip>
+                    }>
+                    <Button variant='info' className='me-1'
+                  as={Link} to={`update-product/${item.pID}`}
+                  ><PenFill/></Button> 
+
+                  </OverlayTrigger>
+                  <OverlayTrigger
+                    placement='bottom'
+                    overlay={
+                      <Tooltip>
+                        delete?
+                      </Tooltip>
+                    }>
+                    <Button variant='danger'
+                      onClick={()=>{handleItemDelete(item.pID)}}
+                    ><TrashFill/></Button> 
+
+                  </OverlayTrigger>
+                </div>
               </td>
             </tr>
           )}

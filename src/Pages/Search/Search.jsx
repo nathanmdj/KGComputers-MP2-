@@ -7,14 +7,23 @@ import CartOffcanvas from '../../components/CartOffcanvas/CartOffcanvas';
 import { useSeachContext } from '../../Context/SearchContext';
 
 const Search = () => {
-  const {searchResult} = useSeachContext()
+  const {searchResult} = useSeachContext([])
   const [sortValue, setSortValue] = useState('')
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [alertStyle, setAlertStyle] = useState('');
+  const [sortedProducts, setSortedProducts] = useState([]);
   
+ 
+  useEffect(()=>{
+    if(searchResult.code === 0){
+      setSortedProducts([])
+    } else{
+      setSortedProducts(sortProduct(searchResult, sortValue))
+    }
+  },[searchResult, sortValue])
   
-  const sortedProducts = sortProduct(searchResult, sortValue)
+
   
   const handleShowAlert = (message) => {
     setAlertMessage(message);
@@ -42,8 +51,11 @@ const Search = () => {
       };
   }, []); 
 
+  if (sortedProducts === undefined) {
+    return <h1>No Items Found</h1>
+  }
   return (
-   
+    
     <div className='container-md mb-3'>
       <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 999, width: '50%' }}>
         <Alert variant={alertStyle} show={showAlert} onClose={handleHideAlert} dismissible style={{height: '100px'}}>
@@ -58,7 +70,7 @@ const Search = () => {
         </Col>
         <Col md={9}>
           <div className='sort'>
-            <p>{(searchResult.length < 1) ? 'No result found' : `Showing 1 - ${searchResult.length} out of ${searchResult.length} products`}</p>
+            <p>{(searchResult.code === 0) ? 'No result found' : `Showing 1 - ${searchResult.length} out of ${searchResult.length} products`}</p>
             <Sort setSortValue={setSortValue}/>
           </div>
           

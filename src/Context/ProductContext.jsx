@@ -14,20 +14,6 @@ const ProductContextProvider = (props) => {
   
   
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await axios.get(`${backend_url}/products/${props.category}`);
-    //     setProducts(response.data)
-    //   } catch (error) {
-    //     console.error('Error fetching data:', error);
-    //     setError(error);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
-    // fetchData();
-
     getRequest(`products/${props.category}`)
       .then((data)=>{
         setProducts(data)

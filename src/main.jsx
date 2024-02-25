@@ -22,8 +22,9 @@ import UserProfile from './Pages/UserProfile/UserProfile'
 import OrderHistory from './Pages/UserProfile/OrderHistory'
 import { CartContextProvider } from './Context/CartContext'
 import Succes from './Pages/Checkout/Succes'
-import Main from './AdminDashboard/Pages/ProductList/Main/Main'
 import { ProductUpdateContextProvider } from './Context/ProductUpdateContext'
+import Main from './AdminDashboard/Pages/Main/Main'
+import Orders from './AdminDashboard/Pages/Orders/Orders'
 
 
 
@@ -36,18 +37,14 @@ const router = createBrowserRouter(
 
       <Route path='dashboard' element={<DashboardLayout/>}>
         <Route path='' element={<Main/>}/>
+        <Route path='orders' element={<Orders/>}/>
         <Route path='product-list' element={<ProductList/>}/>
         <Route path='product-list/add-product' element={<AddProduct/>}/>
         <Route path='product-list/update-product' element={
             <ProductUpdateContextProvider>
-
               <UpdateProduct/>
-
             </ProductUpdateContextProvider>
-            
-            
-            }>
-
+            }>7
          <Route path=':pID' element={<UpdateProduct/>}/>
         </Route>
       </Route>
@@ -105,8 +102,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <ProductContextProvider>
             <DescriptionContextProvider>
                 <RouterProvider router={router}/>
-
-              
             </DescriptionContextProvider>
           </ProductContextProvider>
         </CartContextProvider>

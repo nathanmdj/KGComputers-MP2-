@@ -54,7 +54,6 @@ const Description = () => {
       </Row>
       <div className="specs-container">
         <div className="specification border p-3 my-4 rounded-4 col-lg-9">
-          <h5>Product Specifications</h5>
           <Specification
           specs={item.specs}
           />

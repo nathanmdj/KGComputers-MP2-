@@ -38,7 +38,7 @@ const InputField = ({label, type, isInput, getValue, setErrorAlert} ) => {
       <option value='desktop'>Desktop</option>
       <option value='laptop'>Laptop</option>
       <option value='peripherals'>Peripherals</option>
-      <option value='component'>Component</option>
+      <option value='components'>Component</option>
     </Form.Select>
     <Form.Label className={`label ${isValid ? 'valid-label' : ''}`} htmlFor='input'>{label}</Form.Label>
   </Form.Group>
@@ -80,11 +80,16 @@ const ProductForm = () => {
 
     postRequest('add-product', newProduct)
       .then((data) => {
+        navigate('/dashboard/product-list')
         console.log(data);
+      })
+      .catch((error) => {
+        setErrorAlert(error)
+        console.error(error);
       })
 
     
-    navigate('/dashboard/product-list')
+    
   }
 
   return (

@@ -59,7 +59,7 @@ const ProductCategory = (props) => {
         <Col className='border d-none d-md-block side-bar' md={3} lg={2}>
           Filter Sidebar
         </Col>
-        <Col md={9}>
+        <Col md={9} lg={10}>
           <div className='sort'>
             <p>{(products.length < 1) ? 'No result found' : `Showing 1 - ${products.length} out of ${products.length} products`}</p>
             <Sort setSortValue={setSortValue}/>

@@ -11,12 +11,13 @@ const SidebarMenu = () => {
 
       </div>
       <Nav className="flex-column nav-menu">
+        
         <NavLink  to={'/dashboard'}>Main</NavLink>
         <NavLink to={'/dashboard/product-list'}
         className={({isActive}) =>
         `${isActive ? "text-primary" : "text-white" }`
         }>Product List</NavLink>
-        <NavLink to={'/dashboard'}>Orders</NavLink>
+        <NavLink to={'orders'}>Orders</NavLink>
       </Nav>
     </div>
   )

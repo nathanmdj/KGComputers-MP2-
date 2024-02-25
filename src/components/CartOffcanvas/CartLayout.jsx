@@ -58,29 +58,31 @@ const CartLayout = (props) => {
   
   return (
     <div className='cart-offcanvas border-bottom'>
-      <div className="cart-img">
+      <div className="cart-img me-3">
         <img src={props.imageUrl} alt="" />
       </div>
       <div className="cart-description">
         <div className="cart-title">
-          <h5>{props.name}</h5>
+          <p className='fw-bold m-0 '>{props.name}</p>
         </div>
-        <div className='price'> 
+        <div className='offcanvas-price'> 
           <p>&#8369; {props.price}</p>
         </div>
-        <div className="quantity">
+        <div className="quantity d-flex gap-3">
           <input 
+            className='form-control'
             type="number" 
             value={quantity}
             onChange={handleQuantityChange}
             min={1}
           />
+
+          <DeleteFromCart
+            itemRemove={() => handleItemDelete(props.index)}
+          />
         </div>
         <div className="sub-total">
-          <p>&#8369; {subtotal}</p>
-          <DeleteFromCart
-          itemRemove={() => handleItemDelete(props.index)}
-          />
+          <p className='fw-bold'>&#8369; {subtotal}</p>
         </div>
       </div>
     </div>

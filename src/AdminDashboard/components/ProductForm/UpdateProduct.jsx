@@ -110,13 +110,14 @@ const UpdateProduct = () => {
 
     putRequest(`update-product/${pID}`, updatedProduct)
       .then((data) => {       
+        navigate('/dashboard/product-list')
       })  
       .catch((error) => {
         console.error('Error updating product:', error);
-        // Handle error if needed
+        setErrorAlert(error)
       });
     
-      navigate('/dashboard/product-list')
+     
   }
 
   function isEmpty(obj) {

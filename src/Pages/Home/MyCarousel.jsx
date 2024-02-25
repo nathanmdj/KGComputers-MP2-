@@ -10,18 +10,6 @@ const MyCarousel = () => {
   const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    // const fetchImages = async () => {
-    //   try {
-    //     const response = await axios.get(`${backend_url}/carousel-img`);
-    //     setImages(response.data);
-    //   } catch (error) {
-    //     console.error('Error fetching images:', error);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
-    // fetchImages();
     getRequest('carousel-img')
       .then((data)=>{
         setImages(data)
@@ -39,7 +27,7 @@ const MyCarousel = () => {
         <Spinner/>
        
       ) : (
-        <Carousel className='c-item'>
+        <Carousel className='c-item container-lg'>
           {images.map((image, index) => (
             <Carousel.Item key={index}>
               <img

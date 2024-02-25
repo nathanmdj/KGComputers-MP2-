@@ -20,7 +20,7 @@ const StocksAlert = () => {
   return (
     <div className='mt-4 text-danger '>
       <h4>Low Stocks Alert</h4>
-      <Table>
+      <Table hover>
         <thead>
           <tr>
             <th>ID</th>

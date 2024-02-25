@@ -1,6 +1,6 @@
 import React from 'react'
-import SalesChart from '../../../components/Chart/Sales'
-import StocksAlert from '../../../components/StockAlert/StocksAlert'
+import SalesChart from '../../components/Chart/Sales'
+import StocksAlert from '../../components/StockAlert/StocksAlert'
 
 const Main = () => {
   return (

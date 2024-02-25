@@ -32,8 +32,8 @@ const OrderHistory = () => {
         <tbody>
           {orders.map((order, i)=>
             <tr key={i}>
-              <td>{order.order_id}</td>
-              <td>{order.date}</td>
+              <td>{order._id.slice(0,3)}...{order._id.slice(-5)}</td>
+              <td>{new Date(order.createdAt).toISOString().slice(0,10)}</td>
               <td>{order.items.join(', ')}</td>
               <td>₱ {order.total}</td>
               <td>{order.status}</td>
