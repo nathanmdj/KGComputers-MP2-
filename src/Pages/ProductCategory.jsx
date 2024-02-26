@@ -7,6 +7,7 @@ import './productCategory.scss'
 import CartOffcanvas from '../components/CartOffcanvas/CartOffcanvas';
 import Sort from '../components/Sort/Sort';
 import { sortProduct } from '../utils/sort';
+import FilterSidebar from '../components/Sidebar/FilterSidebar';
 
 
 const ProductCategory = (props) => {
@@ -22,7 +23,17 @@ const ProductCategory = (props) => {
   const handleShowAlert = (message) => {
     setAlertMessage(message);
     setShowAlert(true);
+
+    const timeout = setTimeout(() => {
+      setShowAlert(false);
+    }, 1500);
+
+    // Clear timeout on component unmount or if duration changes
+    return () => clearTimeout(timeout);
+  
   };
+
+  
 
   const handleHideAlert = () => {
     setShowAlert(false);
@@ -57,7 +68,7 @@ const ProductCategory = (props) => {
       <h1>{props.category}</h1>
       <Row>
         <Col className='border d-none d-md-block side-bar' md={3} lg={2}>
-          Filter Sidebar
+          <FilterSidebar/>
         </Col>
         <Col md={9} lg={10}>
           <div className='sort'>
