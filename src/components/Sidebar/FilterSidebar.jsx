@@ -59,6 +59,33 @@ const FilterSidebar = ({ onFilterChange }) => {
             checked={selectedOption === 'asus'}
             onChange={(e)=>handleOptionChange(e)}
           />
+          <Form.Check 
+            type="radio"
+            label="HP"
+            name="brand"
+            id="option2"
+            value="hp"
+            checked={selectedOption === 'hp'}
+            onChange={(e)=>handleOptionChange(e)}
+          />
+          <Form.Check 
+            type="radio"
+            label="Lenovo"
+            name="brand"
+            id="option2"
+            value="lenovo"
+            checked={selectedOption === 'lenovo'}
+            onChange={(e)=>handleOptionChange(e)}
+          />
+          <Form.Check 
+            type="radio"
+            label="MSI"
+            name="brand"
+            id="option2"
+            value="msi"
+            checked={selectedOption === 'msi'}
+            onChange={(e)=>handleOptionChange(e)}
+          />
         </Form.Group>
       </Form>
     </div>

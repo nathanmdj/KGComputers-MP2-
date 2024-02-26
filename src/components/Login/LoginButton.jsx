@@ -7,7 +7,7 @@ import { useAuthContext } from '../../Context/AuthContext';
 
 
 const LoginButton = () => {
-const {isAuthenticated, setIsAuthenticated} = useAuthContext()
+const {isAuthenticated, setIsAuthenticated, loginUser} = useAuthContext()
 const navigate = useNavigate()
 
 
@@ -45,9 +45,9 @@ const handleLogout = () => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu className='text-black'>
+            <Dropdown.Item disabled>Hi, {loginUser}! </Dropdown.Item>
             <Dropdown.Item 
             onClick={()=>navigate('/user-profile')}>Profile</Dropdown.Item>
-            <Dropdown.Item>Profile</Dropdown.Item>
             <Dropdown.Item 
             onClick={handleLogout}
             className='a border-top'>Logout</Dropdown.Item>

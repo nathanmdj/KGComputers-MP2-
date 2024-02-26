@@ -68,7 +68,7 @@ const Search = () => {
         <Col className='border d-none d-md-block side-bar' md={3} lg={2}>
           Filter Sidebar
         </Col>
-        <Col md={9}>
+        <Col md={9} lg={10}>
           <div className='sort'>
             <p>{(searchResult.code === 0) ? 'No result found' : `Showing 1 - ${searchResult.length} out of ${searchResult.length} products`}</p>
             <Sort setSortValue={setSortValue}/>

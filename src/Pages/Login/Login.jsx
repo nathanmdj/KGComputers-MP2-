@@ -6,7 +6,7 @@ import { useAuthContext } from '../../Context/AuthContext'
 
 
 const Login = () => {
-  const {setIsAuthenticated} = useAuthContext()
+  const {setIsAuthenticated, setUpdate, update} = useAuthContext()
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -30,6 +30,7 @@ const Login = () => {
         if(data.code === 'success'){
           setIsAuthenticated(true)
           localStorage.setItem('User', data.loginUser)
+          setUpdate(!update)
           navigate('/')
         } else {
           setErrorAlert(data.error)
