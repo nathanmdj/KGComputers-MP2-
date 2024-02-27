@@ -36,6 +36,8 @@ const NewOrdersTable = () => {
                   <Form.Select defaultValue='default'>
                     <option value='default'>{item.status}</option>
                     <option value='preparing'>Preparing</option>
+                    <option value='preparing'>On Delivery</option>
+                    <option value='preparing'>Complete</option>
                   </Form.Select>
                 </Form>
               </td>
