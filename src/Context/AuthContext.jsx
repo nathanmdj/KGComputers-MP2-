@@ -16,8 +16,7 @@ export const AuthContextProvider = (props) => {
     }
     postRequest('loginUser', checkUser)
       .then((data)=>{
-        console.log(data.decryptUser);
-        setLoginUser(data.decryptUser)
+        setLoginUser(data.formattedUser)
       })
 
     if(user !== ''){
