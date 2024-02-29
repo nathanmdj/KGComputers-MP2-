@@ -19,8 +19,21 @@
   }
 
   .user-order-table {
+    // height: 200px;
     th, td {
       background-color: c.$gray-100;
     }
+  }
+
+ 
+}
+
+.userOrder-history {
+  max-height: 100%;
+  overflow: auto;
+
+  table {
+    max-width: 100%;
+    overflow: auto;
   }
 }

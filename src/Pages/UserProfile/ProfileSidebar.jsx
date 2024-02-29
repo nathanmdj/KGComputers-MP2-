@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const ProfileSidebar = () => {
   return (
-    <div className='profile-sidebar'>
+    <div className='profile-sidebar d-none d-md-block '>
       <div className="bg-secondary rounded-3 h-100 menu">
         <Nav>
           <Nav.Link as={Link} to='order-history'>Order History</Nav.Link>

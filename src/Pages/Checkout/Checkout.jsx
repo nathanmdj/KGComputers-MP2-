@@ -5,6 +5,9 @@ import { Button } from 'react-bootstrap'
 import {postRequest} from '../../utils/apiRequest'
 import { useAuthContext } from '../../Context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import gcash from '../Description/payment-options/gcash.png'
+import maya from '../Description/payment-options/maya.png'
+import billease from '../Description/payment-options/billease.svg'
 
 const Checkout = () => {
   const {checkoutCart, checkoutTotal, checkoutQty, updateCartContext, setUpdateCartContext} = useCartContext()
@@ -78,13 +81,13 @@ const Checkout = () => {
             <form className="form">
               <div className="payment--options">
                 <button name="paypal" type="button">
-                
+                  <img src={gcash} alt="" />
                 </button>
                 <button name="apple-pay" type="button">
-                  
+                  <img src={maya} alt="" />
                 </button>
                 <button name="google-pay" type="button">
-            
+                  <img src={billease} alt="" />
                 </button>
               </div>
               <div className="separator">

@@ -30,6 +30,11 @@
     grid-template-columns: 33% 34% 33%;
     gap: 20px;
     padding: 10px;
+
+    img {
+      width: 100%;
+      padding-inline: 10px;
+    }
   }
   
   .payment--options button {
@@ -148,4 +153,20 @@
     margin: 0;
   }
 
+}
+
+.success-page {
+  width: fit-content;
+  padding: 50px;
+
+  h4 {
+    margin-block: 1.5rem;
+  }
+  p {
+    margin: 0;
+  }
+
+  a {
+    margin-top: 1.5rem;
+  }
 }

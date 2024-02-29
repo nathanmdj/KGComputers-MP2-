@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 import { getRequest } from '../../utils/apiRequest'
 import { useAuthContext } from '../../Context/AuthContext'
-
+import './userProfile.scss'
 const OrderHistory = () => {
   const [orders, setOrders] = useState([])
 
@@ -17,7 +17,7 @@ const OrderHistory = () => {
   },[])
 
   return (
-    <div>
+    <div className='userOrder-history'>
       <Table hover striped responsive
       className='user-order-table'>
         <thead>
