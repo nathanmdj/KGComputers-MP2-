@@ -1,4 +1,24 @@
+@use '../../../SASS/customs' as c;
+
 .newOrders-table {
-  // max-height: 200px;
-  overflow: hidden;
+  table {
+    min-width: 560px;
+    overflow: auto;
+  }
+
+  .table-btn {
+    button {
+      background-color: c.$info;
+      border: none;
+      
+    &:hover {
+        background-color: c.$primary;
+      }
+    }
+  }
+
+  .col-xl-2 {
+    width: 160px !important;
+  }
+  
 }

@@ -14,7 +14,6 @@ const SalesChart = () => {
           return item.slice(-5)
         })
 
-        console.log(dates);
         setDailySales(data.sales)
         setLast7Days(dates)
       })
