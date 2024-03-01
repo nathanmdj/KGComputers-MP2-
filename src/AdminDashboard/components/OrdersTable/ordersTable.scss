@@ -1,6 +1,13 @@
 @use '../../../SASS/customs' as c;
 
 .newOrders-table {
+  .orders-formContainer {
+    width: 200px;
+
+    // select, form {
+    //   width: 100%;
+    // }
+  }
   table {
     min-width: 560px;
     overflow: auto;

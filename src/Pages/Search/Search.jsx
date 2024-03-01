@@ -5,6 +5,7 @@ import { sortProduct } from '../../utils/sort';
 import ProductCard from '../../components/Products/ProductCard';
 import CartOffcanvas from '../../components/CartOffcanvas/CartOffcanvas';
 import { useSeachContext } from '../../Context/SearchContext';
+import FilterSidebar from '../../components/Sidebar/FilterSidebar';
 
 const Search = () => {
   const {searchResult} = useSeachContext([])
@@ -66,7 +67,7 @@ const Search = () => {
       <h1>Search</h1>
       <Row>
         <Col className='border d-none d-md-block side-bar' md={3} lg={2}>
-          Filter Sidebar
+          <FilterSidebar/>
         </Col>
         <Col md={9} lg={10}>
           <div className='sort'>

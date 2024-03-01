@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, Modal, Table } from 'react-bootstrap'
+import { Button, DropdownButton, Form, Modal, Table, Dropdown } from 'react-bootstrap'
 import { getRequest, postRequest } from '../../../utils/apiRequest'
 import './ordersTable.scss'
 import { EyeFill } from 'react-bootstrap-icons'
@@ -10,15 +10,29 @@ const NewOrdersTable = () => {
   const [showModal, setShowModal] = useState(false)
   const [order, setOrder] = useState({})
   const [buyerInfo, setBuyerInfo] = useState({})
+  const [statusCategory, setStatusCategory] = useState('1')
 
 
   useEffect(() => {
-    getRequest('admin-newOrders')
-      .then((data)=>{
-        setNewOrders(data)
-      })
-
-  },[update])
+    setNewOrders([])
+    if(statusCategory === '1'){
+      getRequest('admin-newOrders')
+        .then((data)=>{
+          setNewOrders(data)
+        })
+    } else if (statusCategory === '2'){
+        getRequest('admin-processingOrders')
+          .then((data)=>{
+            setNewOrders(data)
+          })
+      } else {
+        getRequest('admin-completedOrders')
+          .then((data)=>{
+            setNewOrders(data)
+          })
+      }
+    console.log(statusCategory);
+  },[update, statusCategory])
 
   const handleSelectChange = (e, id) => {
     const item = {
@@ -30,6 +44,11 @@ const NewOrdersTable = () => {
         setUpdate(!update)
         console.log(data);
       })
+  }
+
+  const handleStatusCategory = (e) => {
+    const status = e.target.value
+    setStatusCategory(status)
   }
 
   const handleDetailsShow = (id) => {
@@ -45,6 +64,16 @@ const NewOrdersTable = () => {
   const handleClose = () => setShowModal(false);
   return (
     <div className='newOrders-table'>
+      <div className="orders-formContainer mb-3">
+        <Form>
+          <Form.Select defaultValue={1}
+            onChange={(e)=>handleStatusCategory(e)}>
+            <option value="1">Recent Orders</option>
+            <option value="2">Processing Orders</option>
+            <option value="3">Completed Orders</option>
+          </Form.Select>
+        </Form>
+      </div>
       <Table striped hover responsive>
         <thead>
           <tr>

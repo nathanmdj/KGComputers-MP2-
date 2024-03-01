@@ -47,7 +47,9 @@ const handleLogout = () => {
           <Dropdown.Menu className='text-black'>
             <Dropdown.Item disabled>Hi, {loginUser}! </Dropdown.Item>
             <Dropdown.Item 
-            onClick={()=>navigate('/user-profile')}>Profile</Dropdown.Item>
+            onClick={()=>navigate('/user-profile/order-history')}>Order History</Dropdown.Item>
+            <Dropdown.Item 
+            onClick={()=>navigate('/user-profile/settings')}>Profile</Dropdown.Item>
             <Dropdown.Item 
             onClick={handleLogout}
             className='a border-top'>Logout</Dropdown.Item>

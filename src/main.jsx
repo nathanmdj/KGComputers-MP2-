@@ -25,6 +25,8 @@ import Succes from './Pages/Checkout/Succes'
 import { ProductUpdateContextProvider } from './Context/ProductUpdateContext'
 import Main from './AdminDashboard/Pages/Main/Main'
 import Orders from './AdminDashboard/Pages/Orders/Orders'
+import ProfileSettings from './Pages/UserProfile/ProfileSettings'
+import ContactUs from './Pages/ContactUs/ContactUs'
 
 
 
@@ -51,11 +53,13 @@ const router = createBrowserRouter(
 
       <Route path='' element={<Layout/>}>
         <Route path='' element={<Home/>}/>
+        <Route path='contactUs' element={<ContactUs/>}/>
         <Route path='search' element={<Search/>}/>
         <Route path='login' element={<Login/>}/>
         <Route path='register' element={<Register/>}/>
         <Route path='user-profile' element={<UserProfile/>}>
           <Route path='order-history' element={<OrderHistory/>}/>
+          <Route path='settings' element={<ProfileSettings/>}/>
 
         </Route>
         

@@ -1,0 +1,12 @@
+@use '../../SASS/customs' as c;
+
+.contact-us {
+  
+  form {
+    width: 100%;
+
+    @media (min-width: map-get(c.$grid-breakpoints, sm)){
+      width: clamp(360px, 70%, 600px);
+    }
+  }
+}
