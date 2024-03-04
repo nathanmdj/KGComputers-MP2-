@@ -40,7 +40,7 @@ const ProductCard = (props) => {
       
       //  checks if the item is in stock
        if(props.stocks < 1 || props.stocks == undefined) {
-         props.showAlert('Error! Item is out of stock')
+         props.showAlert('Item is out of stock! Please Try again later.')
          props.variant('danger')
          
        } else {
@@ -51,7 +51,7 @@ const ProductCard = (props) => {
          localStorage.setItem('cart', JSON.stringify(existingCart));
          console.log('Item added to cart:', newItem);
          if(button === 'add'){
-          props.showAlert('Success')
+          props.showAlert('Item added to cart successfully!')
           props.variant('success')
          } else if(button === 'buy'){
           props.showOffcanvas()
