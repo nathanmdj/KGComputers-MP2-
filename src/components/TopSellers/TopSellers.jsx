@@ -42,7 +42,7 @@ const TopSellers = () => {
 
   return (
     <div className='top-seller mt-3 container-lg mb-3'>
-      <div style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 999, width: '50%' }}>
+      <div style={{ position: 'fixed', top: '40%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 999, width: '300px' }}>
         <Alert variant={alertStyle} show={showAlert} onClose={handleHideAlert} dismissible style={{height: '100px'}}>
           {alertMessage}
         </Alert>

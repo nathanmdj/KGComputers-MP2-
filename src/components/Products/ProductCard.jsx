@@ -24,7 +24,7 @@ const ProductCard = (props) => {
       // if the button clicked is cart icon, it will display a succes notif
       // if it is the buy button it will open the cart offcanvas
          if(button === 'add'){
-          props.showAlert('Success')
+          props.showAlert('Item added to cart successfully!')
           props.variant('success')
          } else if(button === 'buy'){
           props.showOffcanvas()

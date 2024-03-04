@@ -17,18 +17,24 @@ const SidebarMenu = () => {
       <div className="brand">
 
       </div>
-      <Nav className="flex-column nav-menu">
+      <Nav className="flex-column nav-menu mb-5 align-items-center ">
         
         <NavLink  to={'/dashboard'}>Main</NavLink>
         <NavLink to={'/dashboard/product-list'}
         className={({isActive}) =>
         `${isActive ? "text-primary" : "text-white" }`
         }>Product List</NavLink>
-        <NavLink to={'orders'}>Orders</NavLink>
+        <NavLink to={'orders'}
+        className={({isActive}) =>
+        `${isActive ? "text-primary" : "text-white" }`
+        }>Orders</NavLink>
       </Nav>
-
-      <Button 
-      onClick={()=>handleLogout()}>Logout</Button>
+      
+      <div className="logout-btn d-flex justify-content-center pt-5">
+        <Button 
+        className='text-white mt-5'
+        onClick={()=>handleLogout()}>Logout</Button>
+      </div>
     </div>
   )
 }
