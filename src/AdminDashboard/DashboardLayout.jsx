@@ -1,12 +1,18 @@
-import React, {useState} from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React from 'react';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import DashboardHeader from './components/DashboardHeader/DashboardHeader';
 import SidebarMenu from './components/SidebarMenu/SidebarMenu';
 import './dashboardLayout.scss';
 import { Col, Row } from 'react-bootstrap';
+import { useAuthContext } from '../Context/AuthContext';
+import AdminLogin from './Pages/AdminLogin/AdminLogin';
 
 function DashboardLayout() {
-  
+    const {adminAuth} = useAuthContext()
+
+    if (!adminAuth) {
+      return <AdminLogin/>
+    }
   return (
     
     <div>

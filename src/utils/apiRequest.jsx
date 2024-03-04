@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const backend_url = 'https://kgcomputers.onrender.com';
-// const backend_url = 'http://localhost:5000';
+
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 
 export const postRequest = (route, body) => {  
   const fetchData = async () => {

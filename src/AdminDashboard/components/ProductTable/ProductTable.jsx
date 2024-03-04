@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, OverlayTrigger, Table, Tooltip } from 'react-bootstrap'
+import { Button, OverlayTrigger, Table, Tooltip, Pagination } from 'react-bootstrap'
 import {getRequest } from '../../../utils/apiRequest'
 import { PenFill, TrashFill } from 'react-bootstrap-icons'
 import './productTable.scss'
@@ -16,13 +16,18 @@ const ProductTable = () => {
   const [modalMessage, setModalMessage] = useState('')
   const [modalTitle, setModalTitle] = useState('')
   const [selectedID, setSelectedID] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPage, setTotalPage] = useState(1)
+  const [totalCount, setTotalCount] = useState(0)
 
   useEffect(()=>{
-    getRequest('all-products')
+    getRequest(`all-products/${currentPage}`)
     .then((data)=> {
-      setFilteredProducts(data)
+      setFilteredProducts(data.products)
+      setTotalCount(data.totalCount)
+      setTotalPage(data.totalPages)
     })
-  },[update])
+  },[update, currentPage])
  
   const handleItemDelete = (id) => {
     setConfirmModalShow(true)
@@ -32,7 +37,30 @@ const ProductTable = () => {
     setModalClose('Cancel')
     setSelectedID(id)
   }
- 
+  
+  const paginationItems = [];
+
+  for (let i = 1; i <= totalPage; i++) {
+    paginationItems.push(
+      <Pagination.Item 
+        key={i}
+        active={currentPage === i}
+        onClick={()=>setCurrentPage(i)}
+      >{i}</Pagination.Item>
+    );
+  }
+
+  const displayedItems = () => {
+    if (currentPage === totalPage) {
+      const lastPageItems = totalCount % 10;
+      const startCount = totalCount - lastPageItems + 1
+
+      return <span>{startCount}-{totalCount}</span>
+    } else {
+      return <span>{(currentPage * 10) - 9}-{currentPage * 10}</span>
+    }
+  }
+
   return (
     <div>
       <Button as={Link} to='add-product'
@@ -102,6 +130,17 @@ const ProductTable = () => {
       update={update}
       setUpdate={setUpdate}
       />
+
+      <div className="pagination d-flex justify-content-between ">
+        <p>Showing {displayedItems()} of {totalCount}</p>
+        <Pagination>
+          <Pagination.Prev 
+            onClick={()=>setCurrentPage((prev)=> prev > 1 ? prev - 1 : prev)}/>
+            {paginationItems}
+          <Pagination.Next onClick={()=>setCurrentPage((prev)=>prev < totalPage ? prev + 1 : prev)}/>
+        </Pagination>
+      </div>   
+
     </div>
   )
 }

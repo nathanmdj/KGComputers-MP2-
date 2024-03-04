@@ -23,7 +23,7 @@ const Succes = () => {
     }, 1000);
 
     return () => clearInterval(intervalId); // Cleanup function to clear the interval
-  }, [navigate]);
+  }, []);
   
 
   return (

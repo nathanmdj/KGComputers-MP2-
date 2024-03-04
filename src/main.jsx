@@ -27,6 +27,7 @@ import Main from './AdminDashboard/Pages/Main/Main'
 import Orders from './AdminDashboard/Pages/Orders/Orders'
 import ProfileSettings from './Pages/UserProfile/ProfileSettings'
 import ContactUs from './Pages/ContactUs/ContactUs'
+import AdminLogin from './AdminDashboard/Pages/AdminLogin/AdminLogin'
 
 
 
@@ -36,9 +37,10 @@ const router = createBrowserRouter(
     <Route path='/'>
       <Route path='checkout' element={<Checkout/>}/>
       <Route path='purchase-success' element={<Succes/>}/>
-
+      <Route path='adminLogin' element={<AdminLogin/>}/>
       <Route path='dashboard' element={<DashboardLayout/>}>
         <Route path='' element={<Main/>}/>
+        
         <Route path='orders' element={<Orders/>}/>
         <Route path='product-list' element={<ProductList/>}/>
         <Route path='product-list/add-product' element={<AddProduct/>}/>

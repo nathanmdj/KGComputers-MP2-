@@ -8,6 +8,7 @@ export const AuthContextProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [loginUser, setLoginUser] = useState('')
   const [update, setUpdate] = useState(false)
+  const [adminAuth, setAdminAuth] = useState(false)
   
   useEffect(()=> {
     const user = localStorage.getItem('User') || '';
@@ -16,17 +17,26 @@ export const AuthContextProvider = (props) => {
     }
     postRequest('loginUser', checkUser)
       .then((data)=>{
+        if(data.formattedUser === ''){
+          setIsAuthenticated(false)
+          localStorage.removeItem('User')
+          return
+        }
         setLoginUser(data.formattedUser)
+        setIsAuthenticated(true)
+      })
+      .catch((error)=>{
+        setIsAuthenticated(false)
       })
 
     if(user !== ''){
-      setIsAuthenticated(true)
+      
     }
   },[update])
  
 
   return (
-    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, loginUser, setUpdate, update}}>
+    <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated, loginUser, setUpdate, update, adminAuth, setAdminAuth}}>
       {props.children}
     </AuthContext.Provider>
   )
