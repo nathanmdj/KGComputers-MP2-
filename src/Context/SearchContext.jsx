@@ -6,7 +6,6 @@ import Spinner from '../components/Spinner/Spinner';
 
 
 const SeachContext = createContext();
-const backend_url = 'https://kgcomputers.onrender.com';
 
 export const SeachContextProvider = (props) => {
   const [query, setQuery] = useState('')

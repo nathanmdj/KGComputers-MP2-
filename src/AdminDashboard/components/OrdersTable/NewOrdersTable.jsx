@@ -71,7 +71,7 @@ const NewOrdersTable = () => {
   const displayedItems = () => {
     if (currentPage === totalPage) {
       const lastPageItems = totalCount % 10;
-      const startCount = totalCount - lastPageItems + 1
+      const startCount = lastPageItems !== 0 ? totalCount - lastPageItems + 1 : 1
 
       return <span>{startCount}-{totalCount}</span>
     } else {
